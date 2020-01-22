@@ -1,0 +1,16 @@
+def getImgIds(self, catNms=[]):
+        """
+        :param catNms: category names
+        :return: all the image ids contain the categories
+        """
+        catNms = catNms if _isArrayLike(catNms) else [catNms]
+        if len(catNms) == 0:
+            return self.imglist
+        else:
+            imgids = []
+            for i, cat in enumerate(catNms):
+                if i == 0:
+                    imgids = set(self.catToImgs[cat])
+                else:
+                    imgids &= set(self.catToImgs[cat])
+return list(imgids)

@@ -1,0 +1,4 @@
+/darknet/custom2/images/image-0005.jpeg
+/darknet/custom2/images/image-0043.jpeg
+/darknet/custom2/images/image-0011.jpeg
+/darknet/custom2/images/image-0023.jpeg

@@ -1,0 +1,5 @@
+classes= 1
+train  = custom2/train.txt  
+valid  = custom2/test.txt  
+names = custom2/snake.names  
+backup = backup/
