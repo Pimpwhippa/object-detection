@@ -1,0 +1,38 @@
+
+
+docker run -p 8888:8888 -d -it -e GRANT_SUDO=yes --user root --name jupyterdatascience -v home/pimpwhippa -v /mnt/nas/objectstodetect:/home/jovyan/coco jupyter/datascience-notebook
+
+user@Obodroid:~ $ docker start jupyterdatascience
+jupyterdatascience
+user@Obodroid:~ $ docker container ls
+CONTAINER ID        IMAGE                          COMMAND                  CREATED             STATUS              PORTS                    NAMES
+286afb7738e3        jupyter/datascience-notebook   "tini -g -- start-no…"   39 hours ago        Up 6 seconds        0.0.0.0:8888->8888/tcp   jupyterdatascience
+4b04332bbcd2        pimpwhippa/work:cocotoyolo     "/bin/bash"              4 weeks ago         Up 23 hours                                  pimpwhippa
+user@Obodroid:~ $ docker exec 286afb7738e3 jupyter notebook list
+Currently running servers:
+http://0.0.0.0:8888/?token=8641c028543be7c4e88f436503d24901ecd2047dd6a65379 :: /home/jovyan
+user@Obodroid:~ $ docker exec -it jupyterdatascience bash
+root@286afb7738e3:~# ls
+coco  cocoapi  work
+root@286afb7738e3:~# git clone --recursive https://github.com/fvisin/dataset_loaders.git
+Cloning into 'dataset_loaders'...
+remote: Enumerating objects: 1752, done.
+remote: Total 1752 (delta 0), reused 0 (delta 0), pack-reused 1752
+Receiving objects: 100% (1752/1752), 487.58 KiB | 452.00 KiB/s, done.
+Resolving deltas: 100% (1279/1279), done.
+Submodule 'dataset_loaders/images/coco' (https://github.com/pdollar/coco.git) registered for path 'dataset_loaders/images/coco'
+Cloning into '/home/jovyan/dataset_loaders/dataset_loaders/images/coco'...
+remote: Enumerating objects: 953, done.        
+remote: Total 953 (delta 0), reused 0 (delta 0), pack-reused 953        
+Receiving objects: 100% (953/953), 11.70 MiB | 2.03 MiB/s, done.
+Resolving deltas: 100% (566/566), done.
+Submodule path 'dataset_loaders/images/coco': checked out '2934299ee051a601648ee4852b303e1c820aa02e'
+root@286afb7738e3:~# ls
+coco  cocoapi  dataset_loaders  work
+root@286afb7738e3:~# pip install [--user] -e <dataset_loaders path> -r requirements.txt
+Fatal Python error: _PySys_BeginInit: <stdin> is a directory, cannot continue
+
+Current thread 0x00007fba22698740 (most recent call first):
+root@286afb7738e3:~# 
+
+

@@ -1,0 +1,57 @@
+https://stackoverflow.com/questions/50670561/create-tf-record-for-selected-class-ids-on-coco-dataset
+
+https://github.com/Cartucho/mAP
+https://towardsdatascience.com/implementation-of-mean-average-precision-map-with-non-maximum-suppression-f9311eb92522
+
+https://github.com/rafaelpadilla/Object-Detection-Metrics
+
+https://github.com/AlexeyAB/darknet/issues/2154
+performance chart
+https://github.com/pjreddie/darknet/issues/604
+
+https://github.com/AlexeyAB/darknet/issues/2145#issuecomment-451908890
+
+ydixon
+root@3bd6b6e7921c:/darknet/mAP_eval# python3
+Python 3.5.2 (default, Nov 12 2018, 13:43:14) 
+[GCC 5.4.0 20160609] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from pred_yolo2json import write_json
+>>> write_json((input_txt, output_json, class_file, separator_key='Enter Image Path:', img_format='.jpg') 
+  File "<stdin>", line 1
+    write_json((input_txt, output_json, class_file, separator_key='Enter Image Path:', img_format='.jpg')
+                                                                 ^
+SyntaxError: invalid syntax
+>>> write_json((../darknet/result.txt, grandyolo.json, ../../objectstodetect/traingrandyolo/cocoimagenet.names, separator_key='Enter Image Path:', img_format='.jpg')
+
+>>> write_json()
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: write_json() missing 3 required positional arguments: 'input_txt', 'output_json', and 'class_file'
+>>> write_json('result.txt', 'grandyolo.json', 'cocoimagenet.names')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/darknet/mAP_eval/pred_yolo2json.py", line 26, in write_json
+    class_names = load_class_names(class_file)
+  File "/darknet/mAP_eval/pred_yolo2json.py", line 22, in load_class_names
+    with open(path) as f:
+FileNotFoundError: [Errno 2] No such file or directory: 'cocoimagenet.names'
+>>> exit()
+root@3bd6b6e7921c:/darknet/mAP_eval# cp ../../objectstodetect/traingrandyolo/cocoimagenet.names 
+cp: missing destination file operand after '../../objectstodetect/traingrandyolo/cocoimagenet.names'
+Try 'cp --help' for more information.
+root@3bd6b6e7921c:/darknet/mAP_eval# cp ../../objectstodetect/traingrandyolo/cocoimagenet.names .
+root@3bd6b6e7921c:/darknet/mAP_eval# python3
+Python 3.5.2 (default, Nov 12 2018, 13:43:14) 
+[GCC 5.4.0 20160609] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from pred_yolo2json import write_json
+>>> write_json('result.txt', 'grandyolo.json', 'cocoimagenet.names')
+>>> exit()
+root@3bd6b6e7921c:/darknet/mAP_eval# ls
+5k.txt                 ann_dontshowv3.json  coco_valid_gt_mapped_cls_ids.json  darknet_builtin_coco_results.json  grandyolo.json      result.txt
+README.md              coco.names           cocodontshow.names                 darknet_pred.json                  gt_yolo2json.py     resultfromv3weights.txt
+__pycache__            coco_valid.json      cocodontshow_result.txt            demo 
+
+
+

@@ -1,0 +1,105 @@
+(cv) root@0f22b717f3ef:/darknet/darknet# ./darknet detector test ../custom2/yoloopenimagescut/train2.data ../custom2/yoloopenimagescut/yolov3-openimages.cfg ../custom2/yoloopenimages/yolov3-openimages.weights ../testimages/20039512.jpg
+
+
+
+'bird','cat','dog','backpack','handbag','suitcase','knife','tv', 'laptop','cell phone','scissors'
+
+make showing bbox an option in ShowAnns()
+https://github.com/cocodataset/cocoapi/pull/183
+
+PythonAPI/pycocotools/coco.py
+
+292  poly = [[bbox_x, bbox_y], [bbox_x, bbox_y+bbox_h], [bbox_x+bbox_w, bbox_y+bbox_h], [bbox_x+bbox_w, bbox_y]]
+                    np_poly = np.array(poly).reshape((4,2))
+                    polygons.append(Polygon(np_poly))
+                    color.append(c)
+#add dash line bbox
+
+ax.add_patch(Polygon(np_poly, linestyle='--', facecolor='none', edgecolor=c, linewidth=2))
+
+
+
+extract segmentation
+https://forums.fast.ai/t/image-segmentation-on-coco-dataset-summary-questions-and-suggestions/36816/3
+
+how to use pycocotools.coco
+https://www.programcreek.com/python/example/94653/pycocotools.coco.COCO
+
+cocoapi demo.py
+https://github.com/D-X-Y/FPAIT/blob/master/cocoapi/demo.py
+
+visualize json and image
+http://www.programmersought.com/article/591643759/
+
+catIds = coco.getCatIds(catNms=['person','car','motorcycle','bird','cat','dog','backpack','handbag','suitcase','knife','tv', 'laptop','cell phone','scissors']);
+imgIds = coco.getImgIds(catIds=catIds);
+
+user@Obodroid:~ $ docker start jupyterdatascience
+jupyterdatascience
+user@Obodroid:~ $ docker container ls
+CONTAINER ID        IMAGE                          COMMAND                  CREATED             STATUS              PORTS                    NAMES
+3afe7a2bcc3e        tacotron-2_image               "/bin/bash"              27 hours ago        Up 27 hours                                  tacotron2
+286afb7738e3        jupyter/datascience-notebook   "tini -g -- start-no…"   2 days ago          Up 12 seconds       0.0.0.0:8888->8888/tcp   jupyterdatascience
+4b04332bbcd2        pimpwhippa/work:cocotoyolo     "/bin/bash"              4 weeks ago         Up 2 days                                    pimpwhippa
+user@Obodroid:~ $ docker exec 286afb7738e3 jupyter notebook list
+Currently running servers:
+http://0.0.0.0:8888/?token=a68b06bf574ed836493ea4a6c349ab98418a6504bce31295 :: /home/jovyan
+
+
+250519
+
+java -jar pimpwhippa/object-detection/cocotoyolo.jar "/mnt/nas/objectstodetect/cocodataset/annotations/instances_train2017.json" "/mnt/nas/objectstodetect/cocodataset/images/train2017/" "person,car,motorcycle,bird,cat,dog,backpack,handbag,suitcase,knife,tv,laptop,cell phone,scissors" "/home/user/pimpwhippa/object-detection/yolo14"
+
+Loading annotations...
+RootEntry{info=InfoEntry{year=2017, version='1.0', description='COCO 2017 Dataset', contributor='COCO Consortium', url='http://cocodataset.org', dateCreated='2017/09/01'}, # images=118287, # annotations=860001, # licenses=8, # categories=80}
+Bounding box annotation 'AnnotationEntry{id=2206849, imageId=550395, categoryId=1, segmentation=null, area=0.0, boundryBox=[9.98, 188.56, 5.54, 0.0], isCrowd=0}' corresponding to image '000000550395.jpg is invalid and has zero area. Omitting.
+user@Obodroid:~ $ 
+
+
+1 person      0
+3 car         1
+4 motorcycle  2
+15 bird       3
+16 cat        4
+17 dog        5
+25 backpack   6
+27 handbag    7
+29 suitcase   8
+44 knife      9
+63 tv         10
+64 laptop     11
+68 cell phone 12
+77 scissors   13
+
+pjreddie got em wrong! hv to take from cocoapi
+
+401416 knife
+401534 motorcycle handbag
+402297 dog suitcase
+398246 cell phone
+
+
+Will loop through all files in folder A, and if a file in B with same name exists, will cat both:
+
+for fA in A/*; do
+    fB=B/${f##*/}
+    [[ -f $fA && -f $fB ]] && cat "$fA" "$fB"
+done
+
+java -jar pimpwhippa/object-detection/cocotoyolo.jar "/mnt/nas/objectstodetect/cocodataset/annotations/instances_val2017.json" "/mnt/nas/objectstodetect/cocodataset/val2017/" "person,car,motorcycle,bird,cat,dog,backpack,handbag,suitcase,knife,tv,laptop,cell phone,scissors" "/home/user/pimpwhippa/object-detection/yolo14/val"
+
+where images are in relative with detector
+/darknet/darknet/trainyolo14/data/yolo14img
+
+/darknet/darknet/trainyolo14/data/cocodataset/val2017
+
+./darknet detector train trainyolo14/yolo14.data trainyolo14/yolo14.cfg ../weights/darknet53.conv.74
+
+
+./darknet detector train trainyolo14/yolo14.data trainyolo14/yolo14.cfg ../weights/yolov3-tiny.weights
+
+
+
+java -jar pimpwhippa/object-detection/cocotoyolo.jar "/mnt/nas/objectstodetect/cocodataset/annotations/instances_train2017.json" "/mnt/nas/objectstodetect/train2017/" "all" "/mnt/nas/objectstodetect/traincocodontshow"
+
+java -jar pimpwhippa/object-detection/cocotoyolo.jar "/mnt/nas/objectstodetect/cocodataset/annotations/instances_val2017.json" "/mnt/nas/objectstodetect/cocodataset/val2017/" "all" "/mnt/nas/objectstodetect/traincocodontshow/val2017"

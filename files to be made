@@ -1,0 +1,10 @@
+files to be made
+object_list = [list of objects from Imagenet to be trained
+
+n01734418_annotationking_snake      
+n03701391_annotationmachinegun    
+n01735189_annotationgartersnake   
+n04086273_annotationpistol        
+n01695060_annotationmonitorlizard   
+
+cocoimagenet.names = list of all objects to be trained in correct index

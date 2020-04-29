@@ -1,0 +1,239 @@
+xhost +"local:docker@"
+
+docker exec -it pimpwhippacoco bash
+
+./darknet detector train ../../objectstodetect/traingrandyolo/grandyolo.data ../../objectstodetect/traingrandyolo/grandyolo.cfg ../weights/darknet53.conv.74 -map -show_imgs
+
+./darknet detector train ../../objectstodetect/traingrandyolo/grandyolo.data ../../objectstodetect/traingrandyolo/grandyolo.cfg backup/grandyolo_5000.weights -gpus 0,1,2,3
+
+./darknet detector train ../../objectstodetect/traingrandyolo/grandyolo.data ../../objectstodetect/traingrandyolo/grandyolo.cfg backup35000/grandyolo_last.weights -gpus 0,1,2,3 -map
+
+cannot use show_imgs got some network problem queueing bla bla 
+
+find .| grep -vf ../imagenettrain240819.txt > img_wo_txt.txt
+
+double each line in  a file
+perl -ne 'print "$_" x2'
+awk '{print;print;}' file
+
+add string after each line in a file
+sed -e 's/$/string after each line/' -i filename
+
+add string after every n line in a file
+sed '0~30 s/$/string/g' < inputfile > outputfile
+
+ cp $(<imagenettrain240819.txt) ../imagenettrain
+
+delete lines that contain imagenet from this file
+sed -i '/imagenet/d' ./traintry.txt
+
+copy lines that contain JPEG from this file to this file
+cp sed '/JPEG/' traingrandyolo/traintry.txt
+
+126934
+
+n04086273_23334.JPEG
+n01735189_13435.JPEG
+
+n01729322_9888.JPEG
+n01729977_10201.JPEG
+
+
+./darknet detect ../../objectstodetect/traingrandyolo/cocoimagenet.names ../../objectstodetect/traingrandyolo.grandyolo.cfg ../../objectstodetect/traingrandyolo/grandyolo_23000.weights ../testimages/ratsnake4734.jpg
+
+python3 ../detectorcode/grandyolo.py --image ../testimages/ratsnake4734.jpg --yolo ../grandyolo
+
+
+have to make val dataset for mAP pycocoeval
+move all jpg of val in one folder (val2017 for coco, imagenetval, and fireval --> grandyoloval)
+convert and append xml of imagenetval into instances_val2017.json
+convert and append yolo format of fireval into json
+
+training killed after 23k, 5k, and 3k iterations
+memory leak? or sth else?
+
+do nms
+check between the yolo80 and the 18imagenet and 1fire
+find map
+convert xml and txt to json and append to instances_val2017.json
+
+built-in map doesn't seem to work for now as training get killed before the next map will be calculated at approx.8000 iterations
+
+and then see if more images need labelling
+
+mum said hes encountering the same problem with nms but when connect to DeepSORT online tracking
+
+look in adrianyolo.py compare with pradeep and ydixon nms in medium and github (jupyternotebook)
+
+./darknet detector train ../../objectstodetect/traingrandyolo/grandyolo2.data ../../objectstodetect/traingrandyolo/grandyolo.cfg ../weights/darknet53.conv.74 -map
+
+./darknet detector test ../../objectstodetect/traingrandyolo/grandyolo.data ../../objectstodetect/traingrandyolo/grandyolo.cfg ../weights/grandyolo_23000.weights -thresh 0.005 -dont_show -ext_output < ../../objectstodetect/traingrandyolo/valtry.txt > result.txt
+
+./darknet detector train ../../objectstodetect/trainyolo/trainyolo.data ../../objectstodetect/trainyolo/yolov3.cfg ../weights/darknet53.conv.74 -map
+
+train2014 no. of images 82785
+train2014 no. of txt labels 82083
+
+val2014 no. of images 40506
+val2014 no. of txt labels 40139
+
+find ./00012524 -name "*.PDF" -exec cp {} ./dummy01/ \;
+
+
+./darknet detector train ../../objectstodetect/traincoco2014/traincoco2014.data ../../objectstodetect/trainyolo/yolov3.cfg ../weights/darknet53.conv.74 -map
+
+got map 40% from traincoco2014
+so now will do grandyolo traintry3
+
+sed -i '/cocodataset/d' ./valtry3.txt
+
+./darknet detector train ../../objectstodetect/traingrandyolo/grandyolo3.data ../../objectstodetect/traingrandyolo/grandyolo.cfg ../weights/darknet53.conv.74 -map
+
+
+u270719
+use yolov3-spp.cfg for big and small objects
+
+./darknet partial cfg/yolov3-spp.cfg weights/yolov3-spp.weights yolov3-spp.conv.85 85
+generate weights for fine-tuning
+
+
+to speedup training (with decreasing detection accuracy) do Fine-Tuning instead of Transfer-Learning, set param stopbackward=1 here: https://github.com/AlexeyAB/darknet/blob/6d44529cf93211c319813c90e0c1adb34426abe5/cfg/yolov3.cfg#L548 then do this command: ./darknet partial cfg/yolov3.cfg yolov3.weights yolov3.conv.81 81 will be created file yolov3.conv.81, then train by using weights file yolov3.conv.81 instead of darknet53.conv.74
+
+
+./darknet detector train ../../objectstodetect/traingrandyolo/grandyolo3.data ../../objectstodetect/traingrandyolo/yolov3-spp-grandyolo.cfg ../weights/yolov3-spp.conv.85 -map
+
+./darknet detector test ../../objectstodetect/traingrandyolo/grandyolo3.data ../../objectstodetect/traingrandyolo/grandyolo.cfg ../../objectstodetect/backupgrandyolo3/grandyolo_best.weights -thresh 0.005 -ext_output < ../../objectstodetect/traingrandyolo/valtry3.txt
+
+
+test on grandyolo3.weights
+thresh 0.005 got a lot of fire, usually correct, but confidence is low like 1-2% 
+when change thresh higher to like 0.8 only person, car, truck, cat has high confidence, fire doesn't get detected at all
+
+and now the prediction window is an orphan, closed the terminal but the waitkey still works for prediction window
+
+./darknet detector test ../../objectstodetect/traingrandyolo/grandyolo3.data ../../objectstodetect/traingrandyolo/grandyolo.cfg ../../objectstodetect/backupgrandyolo3/grandyolo_best.weights -thresh 0.5 -ext_output < ../../objectstodetect/imagenettestsplit/oimagenetval.txt
+
+
+for imagenet, same, low confidence for new classes, therefore, new class wont get detect if nms thesh increase to 0.5
+some already got detected
+another problem is the train label only includes the objects, and not other classes in it e.g. if there's a person holding a gun, it detects the gun and not the person, because it wasn't labellled so, or sometimes the detect person and not gun, because for gun it's not confident enough
+
+
+./darknet detector map ../../objectstodetect/traingrandyolo/grandyolo3.data ../../objectstodetect/traingrandyolo/grandyolo.cfg ../../objectstodetect/backupgrandyolo3/grandyolo_best.weights
+
+./darknet detector map ../../objectstodetect/traincoco2014/traincoco2014.data ../../objectstodetect/traincoco2014/yolov3.cfg ../weights/yolov3.weights
+
+011019
+example of zombie process empirical
+close terminal of darknet detector test but the prediction window still open and with waitkey, so it still works and you cant close it clicking the cross
+
+confidence threshold
+word of the day
+
+and now it all hanged, training, mAP calculation for other weights, not best weights
+and the zombie also, have to restart only
+
+so, confidence threshold
+now the newly trained classes are not so confident yet
+fire is only 1%
+ski mask
+but snakeeeeeeeee is 80% because it has 4500 train images labelled snake
+gun maybe a thousand
+but fire only like 300
+
+and the problem is it was labelled only gun, and not person that comes with it
+or ski mask it's only know ski mask and not labelled person
+
+for fire it was usually correct but suppressed if set nms thresh 0.5
+fire is only 1% confident, but is that 0.1% 0.01! for nms thresh?
+
+for gun it cant even detect a person pointing a gun in your face, becasue that front angle was not in the training data
+another one gun and person in the same bbox, so it just sppress gun, i guess because more confident with person
+
+how to increase confident threshold? just train longer or with more images?
+can i just tell them that you're doing fine on fire already, just increase from 1% to 50% confidence can you?
+
+anchor?
+
+./darknet detector train ../../objectstodetect/traingrandyolo/grandyolo3.data ../../objectstodetect/traingrandyolo/yolov3-spp-grandyolo.cfg backup/yolov3-spp-grandyolo_last.weights -map
+
+
+find files starting with n037 then remove them
+find . -type f -name 'n03701391_*.JPEG' -exec rm -f {} \;
+
+
+061019
+traintry4 with relabelling class 0 person into machinegun and pistol
+aiming to improve class 0 ap to reach 75% from 65% and to improve overall from 49.68 to 50
+there are many boxes now that are multiclass (small box inside big box-person holding a gun)
+not sure if that 'll change anything in terms of BCE
+
+./darknet detector train ../../objectstodetect/traingrandyolo/grandyolo4.data ../../objectstodetect/traingrandyolo/grandyolo.cfg ../weights/darknet53.conv.74 -map
+
+071019
+coco14grand
+
+14 coco classes plus the rest ==33 classes
+
+use the same number of training images and same numbers of labels
+but in label files
+delete_label = [1,4,5,...,78,79]
+awk {if $1 isin delete_label}; delete that line
+
+then reindex car to 1, bird, cat, dog to 4,5,6, backpack,handbag,suitcase to 7,8,9 etc.
+99 to 33
+
+then coco14grand.names is good to go!
+mum asked for detected fire to sell to next customer :D
+
+tensorflow knows this shit and hv function to minor change the data and can share only the relevant branch, not the whole trunk
+tree for leaf in tree, for tree in forest-->list comprehension
+that's to make list out of lists
+many discussion there. itertools chain iterables, reduce, flatten
+
+read about adam optimizer, finally complete the loop of deep neural network :) finish the activation function in layers and then feedforward to the yolo.layer_c src/yololayer logistic regression used for binary classification yes or no, because that's the only thing  that matters
+
+optimizer is used when telling the network how to adjust the weights so that the class with bigger number of training boxes won't get too dominant
+something about weak learning rate.. momentum and decay
+
+081019
+yolov3-spp turns out to be bad!
+36% at 40k iterations and down to 30% at 60k iterations! what a disappointment!
+
+while traintry4 with added person label in machinegun and pistol is still gradually increasing. 47% now but not sure if it's gonna reach 50% from the rate of it
+
+next trial will be coco14grand
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

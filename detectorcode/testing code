@@ -1,0 +1,25 @@
+change code to print result (class, and coordinates)
+
+code for testing
+
+get command
+change one of the arguments --image
+loop name of files from a folder into --image argument
+record result (class, and coordinates (results of yolov3 is offsets from anchor--> how to compare with the box from test dataset?))
+
+set test dataset
+-class
+-coordinate (have to convert coordinates of bounding box from test set into size 1280*720?? to be comparable with anchor?)
+
+from result record
+compare class with test set the same or not, output yes or no
+-count yes
+-count no
+record probability
+compare coordinates
+-convert results back to anchor box
+-bring in coordinates of test dataset bounding box
+-compare
+
+python3 ../detectorcode/adrianyolosnake.py --image ../testimages/russellsviper_003.jpg --yolo ../yolov3snake
+

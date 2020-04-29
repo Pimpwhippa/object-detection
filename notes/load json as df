@@ -1,0 +1,31 @@
+
+with open('../coco/cocodataset/annotations/instances_train2017.json') as json_data:
+    data = json.load(json_data)
+
+data.keys()
+
+train=pd.DataFrame(data['annotations'])
+
+
+
+
+https://stackoverflow.com/questions/40442014/python-pandas-valueerror-arrays-must-be-all-same-length
+https://stackoverflow.com/questions/19736080/creating-dataframe-from-a-dictionary-where-entries-have-different-lengths
+https://stackoverflow.com/questions/45051882/valueerror-arrays-must-all-be-same-length-in-python-using-pandas-dataframe?rq=1
+
+read json into dataframe arrays dont have same length
+
+https://stackoverflow.com/questions/2835559/why-cant-python-parse-this-json-data?rq=1
+https://stackoverflow.com/questions/31656040/importing-single-record-using-read-json-in-pandas
+https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_json.html
+https://stackoverflow.com/questions/44980845/importing-json-into-pandas-->this works
+https://stackoverflow.com/questions/48245517/read-json-output-into-pandas-dataframe
+https://stackoverflow.com/questions/40306240/get-all-values-from-each-key
+https://stackoverflow.com/questions/25148611/how-do-i-extract-all-the-values-of-a-specific-key-from-a-list-of-dictionaries
+
+https://realpython.com/python-dicts/
+https://docs.python.org/3/tutorial/datastructures.html
+
+
+
+

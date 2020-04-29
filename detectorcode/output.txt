@@ -1,0 +1,224 @@
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.603674 seconds
+$image
+../testimages/20039512.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.612184 seconds
+$image
+snake: 0.9246
+(495, 169) (480, 247)
+../testimages/24897900911_7d2ee1ecff_b.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.594449 seconds
+$image
+../testimages/3718_1487229022.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.608129 seconds
+$image
+../testimages/39174657745_1658e6f66c_k.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.624766 seconds
+$image
+snake: 0.9276
+(33, 23) (412, 289)
+../testimages/4094409490_7b474a5030.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.601012 seconds
+$image
+snake: 0.9046
+(59, 83) (637, 357)
+../testimages/42-78316421.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.617121 seconds
+$image
+../testimages/462562.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.610553 seconds
+$image
+../testimages/59e0f9051500002b00da1585.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.602426 seconds
+$image
+../testimages/61pXtYGiq1L._SL1253_.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.607509 seconds
+$image
+../testimages/7413599378_03c9197f81.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.600577 seconds
+$image
+snake: 0.8633
+(23, 64) (463, 226)
+../testimages/Checkered-keelback_004.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.621574 seconds
+$image
+../testimages/Cheese-800x416.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.600794 seconds
+$image
+snake: 0.7891
+(130, 36) (453, 264)
+../testimages/Coelognathus-helena-03000033350_01.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.600981 seconds
+$image
+../testimages/IMG_0001.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.612359 seconds
+$image
+snake: 0.8307
+(216, 143) (717, 402)
+../testimages/IMG_1890-1024x683.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.597919 seconds
+$image
+snake: 0.7007
+(369, 140) (545, 278)
+../testimages/Indian-Rock-Python-Langur-kill-2.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.605747 seconds
+$image
+snake: 0.6319
+(73, 177) (655, 314)
+../testimages/Keoladeo_1587_Indian_rock_python.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.617664 seconds
+$image
+snake: 0.9578
+(58, 81) (520, 256)
+../testimages/King-ratsnake.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.605564 seconds
+$image
+snake: 0.5963
+(84, 127) (446, 317)
+../testimages/Ptyas_mucosus_05.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.612786 seconds
+$image
+snake: 0.8090
+(97, 80) (469, 375)
+../testimages/blackrat.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.596964 seconds
+$image
+../testimages/broccoli_header-800x533.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.600276 seconds
+$image
+../testimages/common_trinket_snake_5_foot_long_approx.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.591774 seconds
+$image
+snake: 0.9873
+(52, 182) (1192, 609)
+../testimages/great-plains-rat-snake-pantherophis-emoryi-21065207.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.609994 seconds
+$image
+../testimages/gym.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.625868 seconds
+$image
+snake: 0.9823
+(12, 33) (128, 84)
+../testimages/index09.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.614773 seconds
+$image
+../testimages/indian-rock-python-python-molurus-molurus-non-venomous-rare-called-B325DN.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.593317 seconds
+$image
+snake: 0.7135
+(127, 44) (1035, 708)
+../testimages/indo-chinese-rat-snake-ptyas-korros-non-venomous-common-arunachal-A0BB61.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.601387 seconds
+$image
+../testimages/maryland-black-rat-snake-2.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.617100 seconds
+$image
+snake: 0.5462
+(275, -14) (1354, 963)
+../testimages/maxresdefault_001.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.602909 seconds
+$image
+../testimages/maxresdefault_002.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.611477 seconds
+$image
+../testimages/maxresdefault_010.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.595213 seconds
+$image
+../testimages/mod_dsc047651.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.590092 seconds
+$image
+../testimages/ratsnake3.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.586090 seconds
+$image
+snake: 0.7370
+(12, 54) (373, 183)
+../testimages/ratsnake4734.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.607002 seconds
+$image
+snake: 0.6450
+(129, 70) (447, 286)
+../testimages/russells-viper-daboia-russelii-siamensis-queen-saovabha-snake-farm-head.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.609233 seconds
+$image
+snake: 0.9605
+(-52, 113) (655, 250)
+../testimages/russells-viper-daboia-russelii-siamensis-queen-saovabha-snake-farm-up.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.603397 seconds
+$image
+../testimages/russellsviper_003.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.588085 seconds
+$image
+../testimages/ski.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.600848 seconds
+$image
+snake: 0.9843
+(71, 50) (512, 345)
+../testimages/snake-medicine.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.580325 seconds
+$image
+../testimages/snake-removal-athens-ga.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.591876 seconds
+$image
+snake: 0.9700
+(63, 174) (857, 420)
+../testimages/snake190219.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.581740 seconds
+$image
+snake: 0.9808
+(9, -22) (1121, 697)
+../testimages/sunbeam-snake-1.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.616459 seconds
+$image
+../testimages/western-rat-snake-texas-ratsnake-black-rat-snake-pilot-black-snake-ebnm1g.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.622682 seconds
+$image
+snake: 0.8957
+(53, 23) (302, 207)
+../testimages/white-bellied-rat-snake_0115.jpg
+[INFO] loading YOLO from disk...
+[INFO] YOLO took 0.594001 seconds
+$image
+../testimages/zeusknife.jpg

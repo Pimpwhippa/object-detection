@@ -1,0 +1,167 @@
+note coco-to-yolo DIY
+:return: anns (object array) : loaded ann objects
+try to get all anns array
+
+then put the anns array into a dataframe
+have to see how 'anns array' look like before can convert it to (x,y) center and w, h for yolo format
+actually i haven't seen how the coordinates in annotations/train2017.json looks like
+only saw the label after it has been converted into yolo format
+
+it supposes to be an instance annotation, like circumference of objects
+so i have to find the outer points
+
+then the width furthest away point from each other on x axis
+xmin, xmax
+height (ymax-ymin)
+then find the center point
+
+wtf that's a lot of coding!
+
+what about class?
+catIds
+
+ def loadAnns(self, ids=[]):
+        """
+        Load anns with the specified ids.
+        :param ids (int array)       : integer ids specifying anns
+        :return: anns (object array) : loaded ann objects
+        """
+        if _isArrayLike(ids):
+            return [self.anns[id] for id in ids]
+        elif type(ids) == int:
+            return [self.anns[ids]]
+
+annIds
+
+[7756, 202157, 213294, 255649, 639490]
+
+anns in one random image
+dog
+area': 31748.171700000003,
+  'iscrowd': 0,
+  'image_id': 251368,
+  'bbox': [194.7, 38.35, 259.15, 290.7],
+  'category_id': 18,
+  'id': 7756},
+person
+ 'area': 29412.04815,
+  'iscrowd': 0,
+  'image_id': 251368,
+  'bbox': [0.0, 1.5, 257.42, 297.08],
+  'category_id': 1,
+  'id': 202157},
+ {'segmentation': [[490.54,
+person
+'image_id': 251368,
+  'bbox': [453.96, 2.69, 46.04, 288.2],
+  'category_id': 1,
+  'id': 213294},
+skateboard
+area': 6374.25,
+  'iscrowd': 0,
+  'image_id': 251368,
+  'bbox': [4.5, 270.38, 390.75, 59.25],
+  'category_id': 41,
+  'id': 639490}]
+
+only want bbox of all image_id
+or if can only get bbox via annIds?
+
+list all annIds
+foreach annIds
+retrieve category_id
+bbox
+and groupby image_id
+
+image_id and filename map?
+
+what are bbox coordinates?
+plot the 4 points as rectangle?
+
+https://stackoverflow.com/questions/28373282/how-to-read-a-json-dictionary-type-file-with-pandas/28380068
+import pandas as pd
+import json
+import os
+
+os.chdir('/Users/nicolas/Downloads')
+
+# Reading the json as a dict
+with open('json_example.json') as json_data:
+    data = json.load(json_data)
+
+# using the from_dict load function. Note that the 'orient' parameter 
+#is not using the default value (or it will give the same error than you had)
+# We transpose the resulting df and set index column as its index to get this result
+pd.DataFrame.from_dict(data, orient='index').T.set_index('index')  
+
+json.load()
+https://stackoverflow.com/questions/2835559/why-cant-python-parse-this-json-data?rq=1
+
+pd.read_json()
+https://stackoverflow.com/questions/20037430/reading-multiple-json-records-into-a-pandas-dataframe
+
+json.dumps()
+https://stackoverflow.com/questions/44980845/importing-json-into-pandas
+
+pd.DataFrame(my_json['entities'])
+
+%matplotlib inline
+
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np, pandas as pd
+import cv2
+import json
+from tqdm import tqdm_notebook, tqdm # Iteration visualization
+tqdm.pandas(desc="Loading") # to do progress_apply for pandas
+
+with open('../coco/cocodataset/annotations/instances_train2017.json') as json_data:
+    data = json.load(json_data)
+
+pd.DataFrame(data['annotations'])
+
+why converted label in cocodontshow is more correct than in cocotrain and val2017
+
+000000259000
+000000000081
+000000000073
+000000000196
+
+slice dataframe by row, call it box
+i slice my box dataframe call it row
+confused!
+
+box
+class         x         y     width    height
+0      7  0.539812  0.513585  0.899687  0.943208
+1      7  0.858242  0.440743  0.283516  0.802476
+
+
+def from_yolo_to_cor(box, shape):
+	for index, row in box.iterrows():
+    		img_h, img_w, _ = shape
+    # x1, y1 = ((x + witdth)/2)*img_width, ((y + height)/2)*img_height
+    # x2, y2 = ((x - witdth)/2)*img_width, ((y - height)/2)*img_height
+    		x1, y1 = int((box[0] + box[2]/2)*img_w), int((box[1] + box[3]/2)*img_h)
+    		x2, y2 = int((box[0] - box[2]/2)*img_w), int((box[1] - box[3]/2)*img_h)
+    	return x1, y1, x2, y2
+#box[0] is actually row index0
+
+def draw_boxes(img, boxes):
+    for box in boxes:
+        x1, y1, x2, y2 = from_yolo_to_cor(box, shape)
+        cv2.rectangle(img, (x1, y1), (x2, y2), (0,255,0), 3)
+    plt.imshow(img)
+
+
+tear every rules
+cv2
+plt.show do x2,y2, x1,y1 first bottom right then top left aoohhwwww
+
+wrong place the box
+and why there's only one box. there suppose to be 2.
+
+
+
+
+

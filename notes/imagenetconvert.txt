@@ -1,0 +1,2 @@
+python3 ../../heavystuffishere/convert_VOC_to_yolo/generate_labels.py ../../heavystuffishere/imagenetlabel/words.txt ../../heavystuffishere/imagenetbbox ../../heavystuffishere/imagenetlabel/ 0
+

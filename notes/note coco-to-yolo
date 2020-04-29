@@ -1,0 +1,182 @@
+more text files that jpg files, how can that be possible
+train2017 but hv only 108k images
+
+00000144655.txt  000000292103.txt  000000435811.txt  000000581582.txt
+000000144660.txt  000000292112.txt  000000435814.txt  000000581605.txt
+000000144666.txt  000000292116.txt  000000435820.txt  000000581629.txt
+000000144670.jpg  000000292118.txt  000000435823.jpg  000000581632.txt
+000000144683.txt  000000292120.txt  000000435823.txt  000000581637.txt
+000000144693.txt  000000292123.jpg  000000435829.jpg  000000581654.txt
+000000144694.txt  000000292125.txt  000000435829.txt  000000581655.jpg
+000000144695.txt  000000292127.txt  000000435832.txt  000000581657.jpg
+000000144703.jpg  000000292133.txt  000000435839.jpg  000000581657.txt
+000000144703.txt  000000292135.txt  000000435841.txt  000000581667.txt
+000000144705.jpg  000000292136.txt  000000435848.jpg  000000581668.jpg
+000000144705.txt  000000292145.txt  000000435855.jpg  000000581670.jpg
+000000144715.jpg  000000292146.txt  000000435855.txt  000000581670.txt
+000000144715.txt  000000292156.txt  000000435869.jpg  000000581674.txt
+000000144717.jpg  000000292157.txt  000000435869.txt  000000581683.txt
+000000144717.txt  000000292158.jpg  000000435882.jpg  000000581686.txt
+000000144723.txt  000000292158.txt  000000435882.txt  000000581697.txt
+000000144725.jpg  000000292160.jpg  000000435885.txt  000000581702.txt
+000000144725.txt  000000292169.txt  000000435889.txt  000000581704.txt
+000000144727.txt  000000292170.txt  000000435894.txt  000000581709.txt
+000000144734.txt  000000292177.jpg  000000435896.jpg  000000581717.txt
+000000144746.txt  000000292181.jpg  000000435897.txt  000000581719.txt
+000000144772.txt  000000292182.txt  000000435902.jpg  000000581732.txt
+000000144795.jpg  000000292183.txt  000000435908.txt  000000581736.txt
+000000144795.txt  000000292187.txt  000000435910.txt  000000581738.jpg
+000000144796.jpg  000000292188.txt  000000435920.txt  000000581738.txt
+000000144797.jpg  000000292206.txt  000000435922.txt  000000581744.txt
+000000144804.jpg  000000292211.txt  000000435923.jpg  000000581770.txt
+000000144804.txt  000000292213.txt  000000435929.txt  000000581789.jpg
+000000144814.txt  000000292226.jpg  000000435930.jpg  000000581789.txt
+000000144817.txt  000000292226.txt  000000435931.txt  000000581795.txt
+000000144831.jpg  000000292227.txt  000000435937.txt  000000581797.txt
+000000144831.txt  000000292232.txt  000000435940.txt  000000581815.txt
+000000144832.txt  000000292238.txt  000000435951.txt  000000581827.txt
+000000144836.txt  000000292243.txt  000000435963.txt  000000581831.txt
+000000144847.jpg  000000292249.txt  000000435975.txt  000000581839.jpg
+000000144851.txt  000000292257.txt  000000435986.txt  000000581839.txt
+000000144862.jpg  000000292258.txt  000000435988.jpg  000000581857.jpg
+000000144862.txt  000000292266.txt  000000435990.txt  000000581857.txt
+000000144863.txt  000000292283.jpg  000000436014.txt  000000581860.txt
+000000144870.txt  000000292283.txt  000000436025.txt  000000581873.txt
+000000144874.txt  000000292287.txt  000000436031.jpg  000000581880.jpg
+000000144878.txt  000000292294.txt  000000436031.txt  000000581880.txt
+000000144881.txt  000000292296.txt  000000436038.txt  000000581881.jpg
+000000144896.txt  000000292302.txt  000000436044.txt  000000581881.txt
+000000144897.jpg  000000292304.txt  000000436046.txt  000000581884.txt
+000000144904.jpg  000000292312.jpg  000000436056.txt  000000581886.jpg
+000000144904.txt  000000292312.txt  000000436070.txt  000000581886.txt
+000000144906.txt  000000292314.txt  000000436073.txt  000000581887.txt
+000000144907.txt  000000292315.txt  000000436078.txt  000000581899.txt
+000000144929.txt  000000292324.jpg  000000436092.txt  000000581900.txt
+000000144935.txt  000000292338.jpg  000000436108.txt  000000581904.txt
+000000144937.txt  000000292338.txt  000000436111.jpg  000000581906.txt
+000000144938.txt  000000292346.jpg  000000436117.jpg  000000581909.jpg
+000000144944.txt  000000292346.txt  000000436127.jpg  000000581921.jpg
+000000144961.txt  000000292349.txt  000000436127.txt  000000581921.txt
+000000144965.txt  000000292351.jpg  000000436130.jpg  000000581929.jpg
+000000144971.jpg  000000292351.txt  000000436130.txt
+000000144971.txt  000000292358.jpg  000000436143.txt
+user@Obodroid:/mnt/nas/objectstodetect/cocodataset/train2017 $ ls -f |wc -l
+108088
+user@Obodroid:/mnt/nas/objectstodetect/cocodataset/train2017 $ 
+
+took so long to get this works 
+have to open jupyter notebook
+
+user@Obodroid:~ $ docker start jupyterdatascience
+jupyterdatascience
+user@Obodroid:~ $ docker container ls
+CONTAINER ID        IMAGE                          COMMAND                  CREATED             STATUS              PORTS                    NAMES
+3afe7a2bcc3e        tacotron-2_image               "/bin/bash"              27 hours ago        Up 27 hours                                  tacotron2
+286afb7738e3        jupyter/datascience-notebook   "tini -g -- start-no…"   2 days ago          Up 12 seconds       0.0.0.0:8888->8888/tcp   jupyterdatascience
+4b04332bbcd2        pimpwhippa/work:cocotoyolo     "/bin/bash"              4 weeks ago         Up 2 days                                    pimpwhippa
+user@Obodroid:~ $ docker exec 286afb7738e3 jupyter notebook list
+Currently running servers:
+http://0.0.0.0:8888/?token=a68b06bf574ed836493ea4a6c349ab98418a6504bce31295 :: /home/jovyan
+user@Obodroid:~ $ 
+
+had to go check .txt from 2014 that pjreddie make
+COCO_train2014_000000096897.txt  COCO_train2014_000000194054.txt  COCO_train2014_000000292030.txt  COCO_train2014_000000387712.txt  COCO_train2014_000000484338.txt  COCO_train2014_000000581906.txt
+COCO_train2014_000000096901.txt  COCO_train2014_000000194056.txt  COCO_train2014_000000292034.txt  COCO_train2014_000000387717.txt  COCO_train2014_000000484341.txt  COCO_train2014_000000581909.txt
+COCO_train2014_000000096925.txt  COCO_train2014_000000194067.txt  COCO_train2014_000000292042.txt  COCO_train2014_000000387724.txt  COCO_train2014_000000484342.txt  COCO_train2014_000000581921.txt
+COCO_train2014_000000096931.txt  COCO_train2014_000000194089.txt  COCO_train2014_000000292047.txt  COCO_train2014_000000387731.txt  COCO_train2014_000000484344.txt
+COCO_train2014_000000096958.txt  COCO_train2014_000000194105.txt  COCO_train2014_000000292051.txt  COCO_train2014_000000387736.txt  COCO_train2014_000000484347.txt
+COCO_train2014_000000096969.txt  COCO_train2014_000000194108.txt  COCO_train2014_000000292053.txt  COCO_train2014_000000387748.txt  COCO_train2014_000000484353.txt
+COCO_train2014_000000096973.txt  COCO_train2014_000000194154.txt  COCO_train2014_000000292055.txt  COCO_train2014_000000387750.txt  COCO_train2014_000000484354.txt
+COCO_train2014_000000096975.txt  COCO_train2014_000000194159.txt  COCO_train2014_000000292058.txt  COCO_train2014_000000387759.txt  COCO_train2014_000000484355.txt
+root@4b04332bbcd2:/darknet/cocodata/coco2014/labels/train2014# nano COCO_train2014_000000387360.txt
+root@4b04332bbcd2:/darknet/cocodata/coco2014/labels/train2014# nano COCO_train2014_000000332193.txt
+root@4b04332bbcd2:/darknet/cocodata/coco2014/labels/train2014# nano COCO_train2014_000000135420.txt
+root@4b04332bbcd2:/darknet/cocodata/coco2014/labels/train2014# nano COCO_train2014_000000039100.txt
+root@4b04332bbcd2:/darknet/cocodata/coco2014/labels/train2014# nano COCO_train2014_000000096765.txt
+
+went looking for src in the conversion utility
+
+
+82084
+root@4b04332bbcd2:/darknet/cocodata/coco/labels/train2014# ls -f . | wc -l
+82083
+root@4b04332bbcd2:/darknet/cocodata/coco/labels/train2014# cd   
+root@4b04332bbcd2:~# cd /darknet
+root@4b04332bbcd2:/darknet# ls
+-r          LICENSE    cfg           cocoapi   cocotoyolo.jar  darknet          detectorcode    names       testoutput  weights  yolococo     yolov3-tinycustom
+Dockerfile  README.md  coco-to-yolo  cocodata  custom2         dataset_loaders  image_list.txt  testimages  testsnake   yolo14   yolov3-tiny  yolov3snake
+root@4b04332bbcd2:/darknet# cd coco-to-yolo
+root@4b04332bbcd2:/darknet/coco-to-yolo# ls
+LICENSE.txt  README.md  coco_yolo_setup.sh  pom.xml  src
+root@4b04332bbcd2:/darknet/coco-to-yolo# nano pom.xml
+root@4b04332bbcd2:/darknet/coco-to-yolo# cd src
+root@4b04332bbcd2:/darknet/coco-to-yolo/src# ls
+main  test
+root@4b04332bbcd2:/darknet/coco-to-yolo/src# cd main
+root@4b04332bbcd2:/darknet/coco-to-yolo/src/main# ls
+java
+root@4b04332bbcd2:/darknet/coco-to-yolo/src/main# cd java
+root@4b04332bbcd2:/darknet/coco-to-yolo/src/main/java# ls
+com
+root@4b04332bbcd2:/darknet/coco-to-yolo/src/main/java# cd com
+root@4b04332bbcd2:/darknet/coco-to-yolo/src/main/java/com# ls
+me
+root@4b04332bbcd2:/darknet/coco-to-yolo/src/main/java/com# cd me
+root@4b04332bbcd2:/darknet/coco-to-yolo/src/main/java/com/me# ls
+cica
+root@4b04332bbcd2:/darknet/coco-to-yolo/src/main/java/com/me# cd cica
+root@4b04332bbcd2:/darknet/coco-to-yolo/src/main/java/com/me/cica# ls
+Config.java  Main.java  bbox  coco
+root@4b04332bbcd2:/darknet/coco-to-yolo/src/main/java/com/me/cica# cd bbox
+root@4b04332bbcd2:/darknet/coco-to-yolo/src/main/java/com/me/cica/bbox# ls
+BBoxConverter.java  CocoBBox.java  YoloBBox.java
+root@4b04332bbcd2:/darknet/coco-to-yolo/src/main/java/com/me/cica/bbox# cd ,,
+bash: cd: ,,: No such file or directory
+root@4b04332bbcd2:/darknet/coco-to-yolo/src/main/java/com/me/cica/bbox# cd coco
+bash: cd: coco: No such file or directory
+root@4b04332bbcd2:/darknet/coco-to-yolo/src/main/java/com/me/cica/bbox# cd ..
+root@4b04332bbcd2:/darknet/coco-to-yolo/src/main/java/com/me/cica# cd coco
+root@4b04332bbcd2:/darknet/coco-to-yolo/src/main/java/com/me/cica/coco# ls
+data
+root@4b04332bbcd2:/darknet/coco-to-yolo/src/main/java/com/me/cica/coco# cd data
+root@4b04332bbcd2:/darknet/coco-to-yolo/src/main/java/com/me/cica/coco/data# ls
+json
+root@4b04332bbcd2:/darknet/coco-to-yolo/src/main/java/com/me/cica/coco/data# cd json
+root@4b04332bbcd2:/darknet/coco-to-yolo/src/main/java/com/me/cica/coco/data/json# ls
+AnnotationEntry.java  CategoryEntry.java  ImageEntry.java  InfoEntry.java  LicenseEntry.java  RootEntry.java
+root@4b04332bbcd2:/darknet/coco-to-yolo/src/main/java/com/me/cica/coco/data/json# 
+root@4b04332bbcd2:/darknet/coco-to-yolo/src/main/java/com/me/cica/coco/data/json# 
+root@4b04332bbcd2:/darknet/coco-to-yolo/src/main/java/com/me/cica/coco/data/json# 
+root@4b04332bbcd2:/darknet/coco-to-yolo/src/main/java/com/me/cica/coco/data/json# 
+
+finally figure out it's this
+
+
+1 person      0
+3 car         1
+4 motorcycle  2
+15 bird       3
+16 cat        4
+17 dog        5
+25 backpack   6
+27 handbag    7
+29 suitcase   8
+44 knife      9
+63 tv         10
+64 laptop     11
+68 cell phone 12
+77 scissors   13
+
+pjreddie got em wrong! calling motorcycle motorbike, it's just need to be tv and he says tvmonitor, sigh, hv to take from cocoapi
+
+had to to this 5 times deleting yolo14 and populate again
+
+java -jar pimpwhippa/object-detection/cocotoyolo.jar "/mnt/nas/objectstodetect/cocodataset/annotations/instances_train2017.json" "/mnt/nas/objectstodetect/cocodataset/images/train2017/" "person,car,motorcycle,bird,cat,dog,backpack,handbag,suitcase,knife,tv,laptop,cell phone,scissors" "/home/user/pimpwhippa/object-detection/yolo14"
+
+Loading annotations...
+RootEntry{info=InfoEntry{year=2017, version='1.0', description='COCO 2017 Dataset', contributor='COCO Consortium', url='http://cocodataset.org', dateCreated='2017/09/01'}, # images=118287, # annotations=860001, # licenses=8, # categories=80}
+Bounding box annotation 'AnnotationEntry{id=2206849, imageId=550395, categoryId=1, segmentation=null, area=0.0, boundryBox=[9.98, 188.56, 5.54, 0.0], isCrowd=0}' corresponding to image '000000550395.jpg is invalid and has zero area. Omitting.
+user@Obodroid:~ $ 
+
+
+

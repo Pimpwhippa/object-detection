@@ -1,0 +1,346 @@
+https://github.com/AlexeyAB/darknet/issues/848
+
+and, What kind of method is good for training objects that are not clearly shaped like a fire / flame?
+
+I don't know any good approaches specifically for this.
+
+
+
+https://github.com/AlexeyAB/darknet/issues/2920
+
+
+Train YOLO v3 on subset of COCO #2920
+
+ 
+PROGRAMMINGENGINEER-NIKI commented on Apr 13 • 
+Hi, Alexey I have 3 questions. I appreciate if you could clarify them.
+
+I wanted to train YOLOv3 for a subset of classes namely, cat, dog, person.
+Could you please explain the steps that I need to take in order to train for a subset of COCO using transfer learning?
+
+Is there any way to detect only these classes without training? If yes could you explain how?
+
+training yolov3 for a subset of images lets say, 4 class, will lead to better performance or not?
+
+Thank you in advance!
+
+ @AlexeyAB
+ Owner
+AlexeyAB commented on Apr 13
+@PROGRAMMINGENGINEER-NIKI Hi,
+
+Just add -dont_show before each line except cat, dog, person here: https://github.com/AlexeyAB/darknet/blob/master/data/coco.names
+
+and run
+./darknet detector test cfg/coco.data cfg/yolov3.cfg yolov3.weights -thresh 0.25
+
+
+new functionality!! -dont_show since around Jan-Feb 2019, answers from Oct 2018 still gave different ways to do this
+https://github.com/AlexeyAB/darknet/issues/2193
+
+https://github.com/AlexeyAB/darknet/issues/2395
+
+
+
+
+https://github.com/AlexeyAB/darknet/issues/2145
+
+How to get mAP on COCO 2014 test dataset, not on validation set? #2145
+ Open	hyomin06 opened this issue on Jan 5 · 4 comments
+ Open
+How to get mAP on COCO 2014 test dataset, not on validation set? #2145
+hyomin06 opened this issue on Jan 5 · 4 comments
+Comments
+Assignees
+No one assigned
+Labels
+Explanations
+Projects
+None yet
+Milestone
+No milestone
+Notifications
+You’re not receiving notifications from this thread.
+3 participants
+@hyomin06
+@AlexeyAB
+@YeShangyuan
+@hyomin06
+ 
+hyomin06 commented on Jan 5
+How to get mAP on COCO 2014 test dataset, not on validation set?
+I couldn't find any upload server for the 2014 COCO test set.
+
+Thanks.
+
+ @AlexeyAB
+ Owner
+AlexeyAB commented on Jan 5 • 
+@hyomin06 Hi,
+
+Test annotations aren't public, so that you could not adjust your model only to the test data and win the competition and take the first place with a bad detection algorithm.
+
+How to test Darknet on the MSCOCO test dataset: #1052 (comment)
+
+https://stackoverflow.com/questions/48368992/how-can-i-use-ms-coco-test-dev-dataset-for-instance-segmentation?answertab=active#tab-top
+
+The test data is just that, test data. They did not release annotations for it. Instead, you train on the train/val datasets and submit results for the test data to the evaluation server. This ensures a fair comparison between different methods.
+
+To evaluate successfully results of YOLOv3 on MS COCO test-dev 2014 with https://worksheets.codalab.org
+
+Download and un-pack: http://images.cocodataset.org/zips/test2014.zip
+Set correct paths valid=test.txt in: https://github.com/AlexeyAB/darknet/blob/master/cfg/coco.data
+Download: https://pjreddie.com/media/files/yolov3.weights
+Generate a result file *.json file suiting for coco eval
+./darknet detector valid cfg/coco.data cfg/yolov3.cfg yolov3.weights
+rename and zip the result file according to COCO eval
+select Paricipate --> test-dev , submit the zipped file to https://worksheets.codalab.org
+refresh and view the eval results
+To test mAP@0.5 on MS COCO Validation 2014 dataset just:
+
+run this script on Linux: https://github.com/AlexeyAB/darknet/blob/master/scripts/get_coco_dataset.sh
+
+set correct path in: https://github.com/AlexeyAB/darknet/blob/master/cfg/coco.data
+
+download: https://pjreddie.com/media/files/yolov3.weights
+
+run command
+./darknet detector map cfg/coco.data cfg/yolov3.cfg yolov3.weights
+
+Or instead you can try to use this way by using https://github.com/cocodataset/cocoapi/tree/master/PythonAPI/pycocotools and this script https://github.com/ydixon/mAP_eval/blob/master/pred_yolo2json.py as written here: #2140
+
+ @AlexeyAB AlexeyAB added the Explanations  label on Jan 5
+ @AlexeyAB AlexeyAB referenced this issue on Jan 6
+ Open
+Getting different mAP with pycocotools #2140
+@AlexeyAB
+ Owner
+AlexeyAB commented on Jan 7 • 
+How to get mAP for IoU=0.50, IoU=0.75 and IoU=0.50:.05:.0.95
+
+Or use MS COCO evaluation server: https://worksheets.codalab.org/ More about it: #2145 (comment)
+
+Or use ./darknet detector valid cfg/coco.data cfg/yolov3.cfg yolov3.weights... and use results with https://github.com/cocodataset/cocoapi/tree/master/PythonAPI/pycocotools
+
+Or use ./darknet detector test cfg/coco.data cfg/yolov3.cfg yolov3.weights -dont_show -ext_output < /home/dickson/data/coco/5k.txt > result.txt and use results with https://github.com/ydixon/mAP_eval/blob/master/pred_yolo2json.py and then with https://github.com/cocodataset/cocoapi/tree/master/PythonAPI/pycocotools More about it: #2140
+
+Or use commands ./darknet detector map cfg/coco.data cfg/yolov3.cfg yolov3.weights -iou_thresh 0.50 -points 101 ... to get mAP@IoU=0.50, mAP@IoU=0.75 and mAP@IoU=0.50:.05:.0.95
+
+mAP@IoU=0.50: ./darknet detector map cfg/coco.data cfg/yolov3.cfg yolov3.weights -iou_thresh 0.50 -points 101
+
+mAP@IoU=0.75: ./darknet detector map cfg/coco.data cfg/yolov3.cfg yolov3.weights -iou_thresh 0.75 -points 101
+
+To calculate AP@[.5, .95] or the same mAP@IoU=0.50:.05:.0.95.
+Run many commands and remember mAPs:
+
+./darknet detector map cfg/coco.data cfg/yolov3.cfg yolov3.weights -iou_thresh 0.50 -points 101
+./darknet detector map cfg/coco.data cfg/yolov3.cfg yolov3.weights -iou_thresh 0.55 -points 101
+./darknet detector map cfg/coco.data cfg/yolov3.cfg yolov3.weights -iou_thresh 0.60 -points 101
+./darknet detector map cfg/coco.data cfg/yolov3.cfg yolov3.weights -iou_thresh 0.65 -points 101
+./darknet detector map cfg/coco.data cfg/yolov3.cfg yolov3.weights -iou_thresh 0.70 -points 101
+./darknet detector map cfg/coco.data cfg/yolov3.cfg yolov3.weights -iou_thresh 0.75 -points 101
+./darknet detector map cfg/coco.data cfg/yolov3.cfg yolov3.weights -iou_thresh 0.80 -points 101
+./darknet detector map cfg/coco.data cfg/yolov3.cfg yolov3.weights -iou_thresh 0.85 -points 101
+./darknet detector map cfg/coco.data cfg/yolov3.cfg yolov3.weights -iou_thresh 0.90 -points 101
+./darknet detector map cfg/coco.data cfg/yolov3.cfg yolov3.weights -iou_thresh 0.95 -points 101
+Then calculate:
+AP@[.5, .95] = mAP@IoU=0.50:.05:.0.95 =
+(mAP@IoU=0.50 + mAP@IoU=0.55 + mAP@IoU=0.60 + mAP@IoU=0.65 + mAP@IoU=0.70 + mAP@IoU=0.75 + mAP@IoU=0.80 + mAP@IoU=0.85 + mAP@IoU=0.90 + mAP@IoU=0.95) / 10
+
+ @AlexeyAB AlexeyAB referenced this issue on Jan 7
+ Open
+coco evaluation metrics #2154
+ @AlexeyAB AlexeyAB referenced this issue on Jan 15
+ Closed
+Yolov3 performance chart #604
+ @AlexeyAB AlexeyAB referenced this issue on Jan 31
+ Open
+calculating map #2253
+ @AlexeyAB AlexeyAB referenced this issue on Mar 6
+ Open
+Anybody can reproduce the mAP reported in the paper on COCO dataset? #1362
+This was referenced on Mar 23
+ Open
+COCO mAP score different than the ones reported in paper #2708
+ Open
+mAP (mean average precision) calculation for different Datasets (MSCOCO, ImageNet, PascalVOC) #2746
+@YeShangyuan
+ 
+YeShangyuan commented on Mar 29
+@AlexeyAB
+./darknet detector map ~/darknet/cfg/coco_4classes.data ~/darknet/cfg/yolov3_coco_darknet49_4classes_test.cfg /export3/media/Dataset/ODdata/mscoco/convertVOC_4/backup/yolov3_coco_darknet49_4classes_310000.weights -iou_thresh 0.50 -points 101
+
+4992Can't open label file. (This can be normal only if you use MSCOCO): /export3/media/Dataset/ODdata/mscoco/labels/val2014/COCO_val2014_000000580608.txt
+Can't open label file. (This can be normal only if you use MSCOCO): /export3/media/Dataset/ODdata/mscoco/labels/val2014/COCO_val2014_000000580693.txt
+Can't open label file. (This can be normal only if you use MSCOCO): /export3/media/Dataset/ODdata/mscoco/labels/val2014/COCO_val2014_000000580720.txt
+Can't open label file. (This can be normal only if you use MSCOCO): /export3/media/Dataset/ODdata/mscoco/labels/val2014/COCO_val2014_000000580870.txt
+4996Can't open label file. (This can be normal only if you use MSCOCO): /export3/media/Dataset/ODdata/mscoco/labels/val2014/COCO_val2014_000000580975.txt
+Can't open label file. (This can be normal only if you use MSCOCO): /export3/media/Dataset/ODdata/mscoco/labels/val2014/COCO_val2014_000000581332.txt
+Can't open label file. (This can be normal only if you use MSCOCO): /export3/media/Dataset/ODdata/mscoco/labels/val2014/COCO_val2014_000000581593.txt
+Can't open label file. (This can be normal only if you use MSCOCO): /export3/media/Dataset/ODdata/mscoco/labels/val2014/COCO_val2014_000000581655.txt
+5000Can't open label file. (This can be normal only if you use MSCOCO): /export3/media/Dataset/ODdata/mscoco/labels/val2014/COCO_val2014_000000581731.txt
+Can't open label file. (This can be normal only if you use MSCOCO): /export3/media/Dataset/ODdata/mscoco/labels/val2014/COCO_val2014_000000581781.txt
+Can't open label file. (This can be normal only if you use MSCOCO): /export3/media/Dataset/ODdata/mscoco/labels/val2014/COCO_val2014_000000581887.txt
+
+detections_count = 78329, unique_truth_count = 0
+class_id = 0, name = person, 9 ap = 0.00 %
+class_id = 1, name = car, ap = 0.00 %
+class_id = 2, name = cat, ap = 0.00 %
+class_id = 3, name = dog, ap = 0.00 %
+for thresh = 0.25, precision = 0.00, recall = -nan, F1-score = -nan
+for thresh = 0.25, TP = 0, FP = 12796, FN = 0, average IoU = 0.00 %
+
+IoU threshold = 50 %
+mean average precision (mAP@0.50) = 0.000000, or 0.00 %
+Total Detection Time: 24.000000 Seconds
+
+ @AlexeyAB
+ Owner
+AlexeyAB commented on Mar 29
+@YeShangyuan
+
+detections_count = 78329, unique_truth_count = 0
+
+You don't have any labels. Your created incorrect dataset.
+
+ @AlexeyAB AlexeyAB referenced this issue on May 4
+ Open
+Evaluate custom detection with COCO evaluation #3094
+ @AlexeyAB AlexeyAB referenced this issue 5 days ago
+ Open
+What is the meaning of "eval=coco" in the .data? #3277
+
+king_cobra2.jpg
+
+nvidia-docker  run -d -it \
+--entrypoint "/bin/bash" \
+--env DISPLAY=$DISPLAY  \
+-v /tmp/.X11-unix:/tmp/.X11-unix \
+-v $(pwd)/pimpwhippa/object-detection:/darknet \
+-v /mnt/nas/objectstodetect:/objectstodetect \
+--name pimpwhippacoco pimpwhippa/work:mountcoco
+
+train.txt
+convert cocotoyolo
+.data
+.cfg
+
+./darknet detector train ../../objectstodetect/traincocodontshow/cocodontshow.data ../../objectstodetect/traincocodontshow/cocodontshow.cfg ../weights/darknet53.conv.74
+
+./darknet detector test ../../objectstodetect/traincocodontshow/cocodontshow.data ../../objectstodetect/traincocodontshow/cocodontshow.cfg ../weights/cocodontshow_last.weights
+
+./darknet detector test ../../objectstodetect/traincocodontshow/cocodontshow.data ../../objectstodetect/traincocodontshow/cocodontshow.cfg ../cocodontshow/cocodontshow_last.weights
+
+only cmd detector test with .data argument will not_show,didn't even have to train! self trained weights is not as confident as yolov3 weights
+
+./darknet detector map ../../objectstodetect/traincocodontshow/cocodontshow.data ../../objectstodetect/traincocodontshow/cocodontshow.cfg ../cocodontshow/cocodontshow_last.weights
+
+
+detections_count = 108077, unique_truth_count = 16524  
+class_id = 0, name = person, ap = 56.87%   	 (TP = 4978, FP = 1347) 
+class_id = 1, name = dont_show bicycle, ap = 0.01%   	 (TP = 0, FP = 31) 
+class_id = 2, name = car, ap = 0.13%   	 (TP = 0, FP = 681) 
+class_id = 3, name = dont_show motorbike, ap = 0.00%   	 (TP = 0, FP = 29) 
+class_id = 4, name = dont_show aeroplane, ap = 0.00%   	 (TP = 0, FP = 12) 
+class_id = 5, name = dont_show bus, ap = 0.00%   	 (TP = 0, FP = 120) 
+class_id = 6, name = dont_show train, ap = 0.00%   	 (TP = 0, FP = 37) 
+class_id = 7, name = dont_show truck, ap = 0.00%   	 (TP = 0, FP = 41) 
+class_id = 8, name = dont_show boat, ap = 0.00%   	 (TP = 0, FP = 6) 
+class_id = 9, name = dont_show traffic light, ap = 0.00%   	 (TP = 0, FP = 29) 
+class_id = 10, name = dont_show fire hydrant, ap = 0.00%   	 (TP = 0, FP = 39) 
+class_id = 11, name = dont_show stop sign, ap = 0.00%   	 (TP = 0, FP = 36) 
+class_id = 12, name = dont_show parking meter, ap = 0.82%   	 (TP = 0, FP = 0) 
+class_id = 13, name = dont_show bench, ap = 0.07%   	 (TP = 0, FP = 36) 
+class_id = 14, name = bird, ap = 0.00%   	 (TP = 0, FP = 85) 
+class_id = 15, name = cat, ap = 0.00%   	 (TP = 0, FP = 123) 
+class_id = 16, name = dog, ap = 0.00%   	 (TP = 0, FP = 236) 
+class_id = 17, name = dont_show horse, ap = 0.00%   	 (TP = 0, FP = 56) 
+class_id = 18, name = dont_show sheep, ap = 0.00%   	 (TP = 0, FP = 5) 
+class_id = 19, name = dont_show cow, ap = 0.00%   	 (TP = 0, FP = 27) 
+class_id = 20, name = dont_show elephant, ap = 0.00%   	 (TP = 0, FP = 30) 
+class_id = 21, name = dont_show bear, ap = 0.00%   	 (TP = 0, FP = 4) 
+class_id = 22, name = dont_show zebra, ap = 0.00%   	 (TP = 0, FP = 45) 
+class_id = 23, name = dont_show giraffe, ap = 0.00%   	 (TP = 0, FP = 3) 
+class_id = 24, name = backpack, ap = 0.00%   	 (TP = 0, FP = 1) 
+class_id = 25, name = dont_show umbrella, ap = 0.00%   	 (TP = 0, FP = 12) 
+class_id = 26, name = handbag, ap = 0.00%   	 (TP = 0, FP = 0) 
+class_id = 27, name = dont_show tie, ap = 0.00%   	 (TP = 0, FP = 38) 
+class_id = 28, name = suitcase, ap = 0.00%   	 (TP = 0, FP = 1) 
+class_id = 29, name = dont_show frisbee, ap = 0.00%   	 (TP = 0, FP = 11) 
+class_id = 30, name = dont_show skis, ap = 0.00%   	 (TP = 0, FP = 0) 
+class_id = 31, name = dont_show snowboard, ap = 0.00%   	 (TP = 0, FP = 1) 
+class_id = 32, name = dont_show sports ball, ap = 0.00%   	 (TP = 0, FP = 7) 
+class_id = 33, name = dont_show kite, ap = 0.00%   	 (TP = 0, FP = 0) 
+class_id = 34, name = dont_show baseball bat, ap = 0.00%   	 (TP = 0, FP = 0) 
+class_id = 35, name = dont_show baseball glove, ap = 0.00%   	 (TP = 0, FP = 0) 
+class_id = 36, name = dont_show skateboard, ap = 0.00%   	 (TP = 0, FP = 30) 
+class_id = 37, name = dont_show surfboard, ap = 0.00%   	 (TP = 0, FP = 4) 
+class_id = 38, name = dont_show tennis racket, ap = 0.00%   	 (TP = 0, FP = 4) 
+class_id = 39, name = dont_show bottle, ap = 0.00%   	 (TP = 0, FP = 133) 
+class_id = 40, name = dont_show wine glass, ap = 0.00%   	 (TP = 0, FP = 16) 
+class_id = 41, name = dont_show cup, ap = 0.00%   	 (TP = 0, FP = 85) 
+class_id = 42, name = dont_show fork, ap = 0.00%   	 (TP = 0, FP = 2) 
+class_id = 43, name = knife, ap = 0.00%   	 (TP = 0, FP = 0) 
+class_id = 44, name = dont_show spoon, ap = 0.00%   	 (TP = 0, FP = 0) 
+class_id = 45, name = dont_show bowl, ap = 0.00%   	 (TP = 0, FP = 17) 
+class_id = 46, name = dont_show banana, ap = 0.00%   	 (TP = 0, FP = 5) 
+class_id = 47, name = dont_show apple, ap = 0.00%   	 (TP = 0, FP = 1) 
+class_id = 48, name = dont_show sandwich, ap = 0.00%   	 (TP = 0, FP = 2) 
+class_id = 49, name = dont_show orange, ap = 0.00%   	 (TP = 0, FP = 7) 
+class_id = 50, name = dont_show broccoli, ap = 0.00%   	 (TP = 0, FP = 0) 
+class_id = 51, name = dont_show carrot, ap = 0.00%   	 (TP = 0, FP = 1) 
+class_id = 52, name = dont_show hot dog, ap = 0.00%   	 (TP = 0, FP = 2) 
+class_id = 53, name = dont_show pizza, ap = 0.00%   	 (TP = 0, FP = 17) 
+class_id = 54, name = dont_show donut, ap = 0.00%   	 (TP = 0, FP = 9) 
+class_id = 55, name = dont_show cake, ap = 0.00%   	 (TP = 0, FP = 6) 
+class_id = 56, name = dont_show chair, ap = 0.00%   	 (TP = 0, FP = 47) 
+class_id = 57, name = dont_show sofa, ap = 0.00%   	 (TP = 0, FP = 4) 
+class_id = 58, name = dont_show pottedplant, ap = 0.00%   	 (TP = 0, FP = 4) 
+class_id = 59, name = dont_show bed, ap = 0.00%   	 (TP = 0, FP = 3) 
+class_id = 60, name = dont_show diningtable, ap = 0.00%   	 (TP = 0, FP = 9) 
+class_id = 61, name = dont_show toilet, ap = 0.00%   	 (TP = 0, FP = 25) 
+class_id = 62, name = tvmonitor, ap = 0.00%   	 (TP = 0, FP = 34) 
+class_id = 63, name = laptop, ap = 0.00%   	 (TP = 0, FP = 57) 
+class_id = 64, name = dont_show mouse, ap = 0.00%   	 (TP = 0, FP = 0) 
+class_id = 65, name = dont_show remote, ap = 0.00%   	 (TP = 0, FP = 1) 
+class_id = 66, name = dont_show keyboard, ap = 0.00%   	 (TP = 0, FP = 7) 
+class_id = 67, name = cell phone, ap = 0.00%   	 (TP = 0, FP = 14) 
+class_id = 68, name = dont_show microwave, ap = 0.00%   	 (TP = 0, FP = 0) 
+class_id = 69, name = dont_show oven, ap = 0.00%   	 (TP = 0, FP = 1) 
+class_id = 70, name = dont_show toaster, ap = 0.00%   	 (TP = 0, FP = 0) 
+class_id = 71, name = dont_show sink, ap = 0.00%   	 (TP = 0, FP = 3) 
+class_id = 72, name = dont_show refrigerator, ap = 0.00%   	 (TP = 0, FP = 2) 
+class_id = 73, name = dont_show book, ap = 0.00%   	 (TP = 0, FP = 15) 
+class_id = 74, name = dont_show clock, ap = 0.00%   	 (TP = 0, FP = 80) 
+class_id = 75, name = dont_show vase, ap = 0.00%   	 (TP = 0, FP = 10) 
+class_id = 76, name = scissors, ap = 0.00%   	 (TP = 0, FP = 2) 
+class_id = 77, name = dont_show teddy bear, ap = 0.00%   	 (TP = 0, FP = 19) 
+class_id = 78, name = dont_show hair drier, ap = 0.00%   	 (TP = 0, FP = 0) 
+class_id = 79, name = dont_show toothbrush, ap = 0.00%   	 (TP = 0, FP = 1) 
+
+ for conf_thresh = 0.25, precision = 0.57, recall = 0.30, F1-score = 0.39 
+ for conf_thresh = 0.25, TP = 4978, FP = 3808, FN = 11546, average IoU = 43.90 % 
+
+ IoU threshold = 50 %, used 101 Recall-points 
+ mean average precision (mAP@0.50) = 0.007239, or 0.72 % 
+Total Detection Time: 77.000000 Seconds
+
+Set -points flag:
+ `-points 101` for MS COCO 
+ `-points 11` for PascalVOC 2007 (uncomment `difficult` in voc.data) 
+ `-points 0` (AUC) for ImageNet, PascalVOC 2010-2012, your custom dataset
+root@3bd6b6e7921c:/darknet/darknet# 
+
+
+./darknet detector test ../../objectstodetect/traincocodontshow/cocodontshow.data ../../objectstodetect/traincocodontshow/cocodontshow.cfg ../cocodontshow/cocodontshow_last.weights -thresh 0.005 -dont_show -ext_output < mnt/nas/objectstodetect/traincocodontshow/test.txt > result.txt
+
+both yolov3.weights and cocodontshow_last.weights get only 0.72% AP. Does the map depends on coco.names or cocodontshow.names? even yolov3.weights get only 0.72% AP
+when wanna check map of coco.data and yolov3.weights, got error, cannot open coco_testdev: where is coco_testdev?
+detector test map or detector valid
+how does the map in alexeyAB repo works? what TP and FP have to do with the dont_show names?
+or make ground truth file and detection file and check again with pycocotools
+
+https://github.com/ydixon/mAP_eval
+
+
+

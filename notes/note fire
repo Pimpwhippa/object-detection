@@ -1,0 +1,13 @@
+match file name
+
+imagenames-classes.csv
+imagenames.jpg,1,0
+
+second column after a comma is 1 or 0
+1 fire, 0 not fire where is ignore?
+1800 fire and smoke
+lets say 1200 not fire for true negative
+dont hv to do polygon flatten
+cant use any available csv features
+just manually bboxing
+using yolomark

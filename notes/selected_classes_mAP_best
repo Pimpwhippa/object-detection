@@ -1,0 +1,56 @@
+41040Cannot load image ../../objectstodetect/val2014/vallabel.jpg
+41044Can't open label file. (This can be normal only if you use MSCOCO): ../../objectstodetect/val2014/vallabel.txt 
+
+ detections_count = 2473987, unique_truth_count = 295103  
+class_id = 0, name = person, ap = 65.61%   	 (TP = 53939, FP = 23227) 
+class_id = 2, name = car, ap = 51.20%   	 (TP = 7501, FP = 4740) 
+class_id = 3, name = motorbike, ap = 58.87%   	 (TP = 1434, FP = 369)
+
+class_id = 14, name = bird, ap = 35.86%   	 (TP = 1285, FP = 901) 
+class_id = 15, name = cat, ap = 80.06%   	 (TP = 1328, FP = 541) 
+class_id = 16, name = dog, ap = 65.84%   	 (TP = 1228, FP = 515)
+
+class_id = 24, name = backpack, ap = 18.83%   	 (TP = 441, FP = 484) 
+
+class_id = 26, name = handbag, ap = 14.76%   	 (TP = 370, FP = 327) 
+
+class_id = 28, name = suitcase, ap = 41.43%   	 (TP = 758, FP = 418) 
+ 
+class_id = 43, name = knife, ap = 15.50%   	 (TP = 354, FP = 504) 
+class_id = 62, name = tvmonitor, ap = 67.20%   	 (TP = 1213, FP = 372) 
+class_id = 63, name = laptop, ap = 68.75%   	 (TP = 1052, FP = 265) 
+class_id = 67, name = cell phone, ap = 32.43%   	 (TP = 614, FP = 374) 
+class_id = 76, name = scissors, ap = 31.58%   	 (TP = 106, FP = 51) 
+
+class_id = 80, name = monitor lizard, ap = 94.43%   	 (TP = 41, FP = 30) 
+class_id = 81, name = crash helmet	, ap = 51.50%   	 (TP = 36, FP = 80) 
+class_id = 82, name = shopping cart, ap = 59.97%   	 (TP = 33, FP = 18) 
+class_id = 83, name = snake, ap = 90.94%   	 (TP = 338, FP = 99) 
+class_id = 84, name = water snake 	, ap = 50.24%   	 (TP = 15, FP = 10) 
+class_id = 85, name = green snake	, ap = 77.11%   	 (TP = 35, FP = 10) 
+class_id = 86, name = night snake 	, ap = 53.58%   	 (TP = 19, FP = 37) 
+class_id = 87, name = king snake	, ap = 87.27%   	 (TP = 43, FP = 12) 
+class_id = 88, name = garter snake	, ap = 91.47%   	 (TP = 37, FP = 9) 
+class_id = 89, name = ring neck snake	, ap = 77.10%   	 (TP = 29, FP = 24) 
+class_id = 90, name = vine snake	, ap = 45.27%   	 (TP = 21, FP = 23) 
+class_id = 91, name = thunder snake, ap = 43.73%   	 (TP = 15, FP = 17) 
+class_id = 92, name = sandviper snake, ap = 72.45%   	 (TP = 20, FP = 17) 
+class_id = 93, name = gun 		, ap = 60.27%   	 (TP = 55, FP = 52) 
+class_id = 94, name = machine gun , ap = 55.23%   	 (TP = 33, FP = 33) 
+class_id = 95, name = pistol , ap = 70.82%   	 (TP = 20, FP = 14) 
+class_id = 96, name = gas mask, ap = 54.94%   	 (TP = 32, FP = 19) 
+class_id = 97, name = ski mask, ap = 88.92%   	 (TP = 30, FP = 17) 
+class_id = 98, name = fire, ap = 38.99%   	 (TP = 46, FP = 15) 
+
+ for conf_thresh = 0.25, precision = 0.65, recall = 0.45, F1-score = 0.53 
+ for conf_thresh = 0.25, TP = 133013, FP = 71578, FN = 162090, average IoU = 49.94 % 
+
+ IoU threshold = 50 %, used Area-Under-Curve for each unique Recall 
+ mean average precision (mAP@0.50) = 0.502054, or 50.21 % 
+Total Detection Time: 708.000000 Seconds
+
+Set -points flag:
+ `-points 101` for MS COCO 
+ `-points 11` for PascalVOC 2007 (uncomment `difficult` in voc.data) 
+ `-points 0` (AUC) for ImageNet, PascalVOC 2010-2012, your custom dataset
+

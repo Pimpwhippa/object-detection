@@ -1,0 +1,9 @@
+
+DIY style for yolo, conversion, and draw bbox
+https://github.com/iampratheesh/Object-Detection-YOLO
+https://medium.com/@pratheesh.27998/object-detection-part2-6a265827efe1
+https://blog.goodaudience.com/part-1-preparing-data-before-training-yolo-v2-and-v3-deepfashion-dataset-3122cd7dd884
+
+cv2.rectangle
+https://stackoverflow.com/questions/50234485/drawing-rectangle-in-opencv-python
+https://www.reddit.com/r/learnprogramming/comments/5fbu50/tuple_object_is_not_callable/

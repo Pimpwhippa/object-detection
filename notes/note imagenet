@@ -1,0 +1,69 @@
+get images
+http://www.image-net.org/download/synset?wnid=n01729322&username=lertlove&accesskey=0b188567e69ce114b046082cb49cbd40f1d5e414&release=latest&src=stanford
+get bbox
+http://www.image-net.org/api/download/imagenet.bbox.synset?wnid=n03127747
+
+hv to add multi-label for snake as now they're all different class ids
+
+convert imagenet annotation to yolo format
+python3 generate_labels.py mapping file, source, destination, int
+
+#:python3 generate_labels.py ../LOC_synset_mapping.txt ../ILSVRC/Annotations/CLS-LOC/train ../ILSVRC/Data/CLS-LOC/train/labels 1
+
+/darknet/ImageNet# python3 generate_labels.py ../../objectstodetect/imagenetannotations/wnid_synset.map ../../objectstodetect/imagenetannotations/n03127747_annotationcrash_helmet ../../objectstodetect/imagenetannotationstxt 03127747
+
+map yolo synset ids .names
+
+80	monitor lizard	8671
+81	crash helmet	16933
+82	shopping cart	23297
+83	snake	
+84	water snake	8902
+85	grass snake	8858
+86	night snake	8922
+87	king snake	8887
+88	garter snake	8891
+89	ring neck snake	8852
+90	vine snake	8917
+91	thunder snake	8850
+92	sandviper snake	8854
+93	gun	
+94	machine gun	20346
+95	pistol		22597
+96	gas mask	18674
+97	ski mask	23464
+98	fire	
+
+
+8671:80, 16933:81, 23297:82, 8902:84, 8858:85, 8922:86, 8887:87, 8891:88, 8852:89, 8917:90, 8850:91, 8854:92, 20346:94, 22597:95
+
+#!/usr/bin/env bash
+tmp=$(mktemp)
+declare -A synsetyolodict=([8671]=80 [16933]=81 [23297]=82 [8902]=84 [8858]=85 [8922]=86 [8887]=87 [8891]=88 [8852]=89 [8917]=90 [8850]=91 [8854]=92 [20346]=94 [22597$
+
+while IFS= read -r file; do 
+   
+    #awk '{print} $1==k{$1=v; print}' "$file" > "$tmp" &&
+    awk '{print} $1==key{$1="${synsetyolodict[@]}"; print}' "$file" > "$tmp" &&
+    #another dict for snake and gun only for superclassing
+    superclass=([83]=80 [83]=81 [83]=82 [83]=84 [83]=85 [83]=86 [83]=87 [83]=88 [83]=89 [83]=90 [83]=91 [83]=92 [93]=94 [93]=95)
+    awk '{print} $1=="${superclass[@]"{$1=$keysuper; print}' "$file" > "$tmp" &&
+    mv "$tmp" "$file"
+   
+done < <(find . -maxdepth 2 -mindepth 2) 
+rm -f "$tmp"
+
+this adds the next line correctly, but I want to replace!! not add!
+for file in *.txt; do awk '{$1=83; print;}' $file >>"$file"; done
+
+
+just use sed!
+ for file in *.txt; do sed -i 's/^16933/81/' $file >>"$file"; done
+
+find /objectstodetect/imagenetannotationstxt -type f -exec basename {} \; > train.txt
+
+select files by extension and copy filenames into a file
+find . -type f -name '*.JPEG' > traintrain.txt
+
+http://www.image-net.org/download/synset?wnid=n03701391&username=lertlove&accesskey=0b188567e69ce114b046082cb49cbd40f1d5e414&release=latest&src=stanford
+
