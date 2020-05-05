@@ -201,8 +201,9 @@ have to use = otherwise all the number stays anyway
 for file in *.txt; do to_delete=$(cat ../traingrandyolo/classes_to_delete.txt | tr "\n" "|"); awk -F"/t" -v pattern="$to_delete" '$1 != /pattern/' "$file" > "$tmp" && mv "$tmp" "$file"; done
 
 
-sed -i 's/2/1/g' *
 
+
+sed -i 's/2/1/g' *
 sed -i 's/3/2/g' *
 sed -i 's/14/3/g' *
 sed -i 's/15/4/g' *
@@ -260,6 +261,765 @@ for file in *.txt; do to_delete=$(cat ../traingrandyolo/classes_to_delete.txt | 
 
 
 for file in *.txt; do egrep -f ../traingrandyolo/classes_to_delete.txt "$file" > "$tmp" && mv "$tmp" "$file"; done
+for file in *.txt; do grep -v -f '^' ../traingrandyolo/classes_to_delete.txt "$file" > "$tmp" && mv "$tmp" "$file"; done
+
+
+for i in `cat FileA` ; do cat FileB | awk -v var="$i" '{ if ($1!=var) print $0_}'>> Result; done
+for i in `cat FileA` ; do cat FileB | awk -v var="$i" '{ if ($1!=var) print $0}' "$file" > "$tmp" && mv "$tmp" "$file"; done
+
+for i in `cat FileA` ; do cat FileB | awk -v var="$i" '$1!=/var/' "$FileB" > "$tmp" && mv "$tmp" "$file"; done
+
+
+
+1|4|5|6|7|8|9|10|11|12|13|17|18|19|20|21|22|23|25|27|29|30|31|32|33|34|35|36|37|38|39|40|41|42|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60|61|64|65|66|68|69|70|71|72|73|74|75|77|78|79
+
+awk '!(/pattern1/ && /pattern2/)' file
+
+
+for file in *.txt; do awk '$1 != /1|4|5|6|7|8|9|10|11|12|13|17|18|19|20|21|22|23|25|27|29|30|31|32|33|34|35|36|37|38|39|40|41|42|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60|61|64|65|66|68|69|70|71|72|73|74|75|77|78|79/' "$file" > "$tmp" && mv "$tmp" "$file"; done
+
+
+grep -v "1|4|5|6|7|8|9|10|11|12|13|17|18|19|20|21|22|23|25|27|29|30|31|32|33|34|35|36|37|38|39|40|41|42|44|45|46|47|48|49|50|51|52|53|54|55|56|57|58|59|60|61|64|65|66|68|69|70|71|72|73|74|75|77|78|79" file
+
+
+Lines containing neither foo nor bar:
+
+awk '!/foo/ && !/bar/'
+
+I have a list of numbers in a file
+
+    cat to_delete.txt
+    2
+    3
+    6
+    9
+    11
+
+and many txt files in one folder. each file has tab delimited lines.
+
+    3 0.55667 0.66778 0.54321 0.12345
+    6 0.99999 0.44444 0.55555 0.66666
+    7 0.33333 0.34567 0.56789 0.34543
+
+I want to remove the lines that the first number ($1 for awk) is in to_delete.txt and print only the lines that the first number is not in to_delete.txt. The change should be replacing the old file.
+
+Expected output
+
+    7 0.33333 0.34567 0.56789 0.34543
+
+
+This is what I got so far, which doesn't remove anything;
+
+    for file in *.txt; do awk '$1 != /2|3|6|9|11/' "$file" > "$tmp" && mv "$tmp" "$file"; done
+
+I've looked through so many similar questions here but still cannot make it work. I also tried grep -v -f to_delete.txt and sed -n -i '/$to_delete/!p'
+
+Any help is appreciated. Thanks!
+
+egrep "^${USERINPUT%% *}," test.csv
+Use of egrep to include deliimiter (start line and coma around the input)
+Use of a small input test removing trailing space via ${VarName%% *}
+
+grep "^$num," test.csv
+line_number=$(awk -F, -v s="$number" '$1==s{print NR}' test.csv)
+
+
+tmp=$(mktemp)
+for file in *.txt; do awk 'FNR==NR{ map[$1] } FNR!=NR && !($1 in map)' ../traingrandyolo/classes_to_delete.txt "$file" > "$tmp"; mv "$tmp" "$file"; done
+for file in *.txt; do awk 'FNR==NR{ map[$1] } FNR!=NR && !($1 in map)' ../traingrandyolo/classes_to_delete.txt "$file" > "$tmp"; mv "$tmp" "$file"; done
+
+nano COCO_train2014_000000581900.txt 3 26
+
+/mnt/nas/objectstodetect/train2014label14/COCO_train2014_000000000071.txt 2
+
+for file in *.txt; do sed -i 's/3/2/g' "$file" > "$tmp" && mv "$tmp" "$file"; done
+
+<input.txt awk -F: '$2 !~ "hello123"' >output.txt
+
+nano COCO_train2014_000000581900.txt
+
+awk '{$1 ==3; print FILENAME }' "$file" > 3_to_change.txt
+
+awk '$1 == 3{ replace[$1] }
+sed -i '^/3/2/g' replace[$1]
+
+this works!
+find . |grep -Rw ^3
+
+xargs -d, -n782 <<< 3tochange.txt ## With "xargs"
+
+find . |grep -Rw ^3|sed -i 's/3/2/g' xargs -n782 <<< 3tochange.txt > 3changed.txt
+
+sed -i 's/3/2/g' $(<tochange.txt) changed all the 2s, not only the $1, guess awk is the answer? awk '$1 == 3; print $1 ==2' or s/^3/^2/g
+
+3 0.456961 0.491009 0.824172 0.887653
+3 0.969344 0.401890 0.061313 0.447488
+3 0.878883 0.357559 0.168391 0.276385
+3 0.084508 0.380904 0.094234 0.146080
+25 0.029180 0.071784 0.058359 0.098779
+3 0.780297 0.359800 0.103125 0.308850
+3 0.425453 0.292359 0.130031 0.147441
+3 0.021523 0.399448 0.043047 0.150869
+
+now find .|grep -Rw ^3 behaves strangely by not stopping the find result at 782 lines but keep continuing on
+
+or
+ printf "%s\n" *.txt | xargs -n1 sed -i "$(sed 's!.*!/& /d!' to_delete.txt)"
+
+dont have to find files first but ask to read all lines in all files , and then in (sed ' ') do ^3/^2 at once without messing with filename results
+
+tmp=$(mktemp)
+for file in *.txt; do awk '$1 == 3; print $1 ==2'"$file" > "$tmp"; mv "$tmp" "$file"; done
+for file in *.txt; do awk '$1 == 3 {print $1 == 2}' "$file" > "$tmp"; mv "$tmp" "$file"; done  ##all lines just become 0
+for file in *.txt; do awk '{if ($1 == 3);print $1 == 2}' "$file" > "$tmp"; mv "$tmp" "$file"; done 
+
+COCO_train2014_000000572310.txt
+ 
+COCO_train2014_000000012650.txt
+
+
+:%s/^\d*//
+This uses the global search %s to find any line that begins with a digit \d* and replace it with nothing //.
+tmp=$(mktemp)
+for file in *.txt; do :%s/^3*/2 "$file" > "$tmp"; mv "$tmp" "$file"; done
+for file in *.txt; do sed 's/^3*/2' "$file" > "$tmp"; mv "$tmp" "$file"; done
+
+finally this works!
+tmp=$(mktemp)
+for file in *.txt; do sed 's/^3/2/' "$file" > "$tmp"; mv "$tmp" "$file"; done
+
+COCO_val2014_000000231855.txt  0 3
+COCO_val2014_000000116377.txt  30 7
+ for file in *.txt; do sed 's/^26/7/' "$file" > "$tmp"; mv "$tmp" "$file"; done
+
+OCO_train2014_000000260110.txt:43 0.816771 0.824797 0.082667 0.121063 
+COCO_train2014_000000260110.txt:43 0.782635 0.963422 0.213521 0.073156 
+COCO_train2014_000000007420.txt:43 0.528817 0.572141 0.249766 0.032969 
+COCO_train2014_000000045808.txt:43 0.114930 0.505812 0.229859 0.653250 
+COCO_train2014_000000494199.txt:43 0.233672 0.497833 0.465844 0.153708 
+COCO_train2014_000000283059.txt:43 0.717063 0.406885 0.013219 0.017604 
+COCO_train2014_000000283059.txt:43 0.715398 0.390104 0.013891 0.019833 
+COCO_train2014_000000283059.txt:43 0.726328 0.376646 0.014625 0.024708 
+COCO_train2014_000000283059.txt:43 0.720938 0.387219 0.011531 0.019646 
+COCO_train2014_000000283059.txt:43 0.717367 0.388073 0.014047 0.027687 
+COCO_train2014_000000283059.txt:43 0.723602 0.380917 0.015734 0.022625 
+COCO_train2014_000000154301.txt:43 0.232166 0.469586 0.025410 0.022516 
+COCO_train2014_000000154301.txt:43 0.218396 0.469187 0.012342 0.027031 
+COCO_train2014_000000154301.txt:43 0.252986 0.460344 0.010328 0.020313 
+COCO_train2014_000000154301.txt:43 0.247471 0.455641 0.008384 0.031000 
+COCO_train2014_000000458617.txt:43 0.490198 0.085477 0.081062 0.170953 
+COCO_train2014_000000458617.txt:43 0.800823 0.041594 0.116562 0.083187 
+COCO_train2014_000000307552.txt:43 0.183852 0.730427 0.043922 0.089563 
+COCO_train2014_000000022275.txt:43 0.485164 0.790516 0.189859 0.090141
+COCO_train2014_000000273653.txt:67 0.707727 0.319209 0.006734 0.008691 
+COCO_train2014_000000007424.txt:67 0.679844 0.404016 0.146784 0.061656 
+COCO_train2014_000000397004.txt:67 0.761052 0.458859 0.191771 0.271906 
+COCO_train2014_000000380484.txt:67 0.558729 0.585758 0.073042 0.042703 
+COCO_train2014_000000566099.txt:67 0.534477 0.487125 0.037984 0.041500 
+COCO_train2014_000000274605.txt:67 0.862680 0.683078 0.061359 0.030528 
+COCO_train2014_000000274605.txt:67 0.883875 0.721482 0.073875 0.126030 
+COCO_train2014_000000002106.txt:67 0.947956 0.831547 0.104089 0.085500 
+COCO_train2014_000000284846.txt:67 0.533696 0.307266 0.021237 0.035719 
+COCO_train2014_000000182710.txt:67 0.857508 0.757792 0.191266 0.344667 
+COCO_train2014_000000182710.txt:67 0.148500 0.619875 0.218719 0.179125 
+COCO_train2014_000000182710.txt:67 0.414547 0.590562 0.092188 0.089625 
+COCO_train2014_000000075603.txt:67 0.842453 0.693357 0.196906 0.304225 
+COCO_train2014_000000393375.txt:67 0.742750 0.621780 0.190781 0.163419 
+COCO_train2014_000000001732.txt:67 0.465883 0.313026 0.029922 0.041518 
+COCO_train2014_000000232165.txt:67 0.295608 0.259620 0.013222 0.014320 
+COCO_train2014_000000278656.txt:67 0.438000 0.937000 0.169040 0.125787 
+COCO_train2014_000000317615.txt:67 0.767037 0.848531 0.085363 0.019187 
+COCO_train2014_000000269004.txt:67 0.088800 0.255778 0.011640 0.038922 
+COCO_train2014_000000227732.txt:67 0.504000 0.497750 0.992000 0.975219 
+COCO_train2014_000000550353.txt:67 0.142680 0.343219 0.074203 0.103104 
+COCO_train2014_000000113032.txt:67 0.601750 0.706042 0.056469 0.056440 
+COCO_train2014_000000550311.txt:67 0.280570 0.145631 0.022047 0.082677 
+COCO_train2014_000000038582.txt:67 0.823578 0.628917 0.004938 0.012125 
+COCO_train2014_000000089390.txt:67 0.776648 0.441271 0.035047 0.047250 
+COCO_train2014_000000111759.txt:67 0.101093 0.520125 0.072675 0.102281 
+COCO_train2014_000000181343.txt:67 0.459965 0.494063 0.062482 0.033625 
+COCO_train2014_000000242807.txt:67 0.413664 0.766888 0.241547 0.207203 
+COCO_train2014_000000028575.txt:67 0.260102 0.730913 0.070516 0.064590 
+COCO_train2014_000000344794.txt:67 0.455775 0.148875 0.042629 0.049156 
+COCO_train2014_000000248320.txt:67 0.201050 0.945962 0.235420 0.108075 
+COCO_train2014_000000021138.txt:67 0.549520 0.559469 0.029485 0.012156 
+COCO_train2014_000000540868.txt:67 0.458773 0.130708 0.057953 0.085458 
+COCO_train2014_000000022275.txt:67 0.513016 0.672570 0.113469 0.052793 
+
+i have to do this sed 's/^3/2/' file in total 66 times, i 'd better write a code to do it mannnn
+
+for all files in .txt
+if line startswith (number in this file)
+replace it with (number in another file)
+reference to same index
+
+
+
+match line startswith 2 digits
+^[0-9]{2}[:.,-]?$
+
+match only 3 (exact, if 34 it wont match)
+^[3][:.,-]?$
+
+match exact in this list only, hv to be exact if it's 1 digit or 2 digits also, 3 have to exact match 3, and 34 have to match only 34, not 3)
+
+sed '/^start_string/s/search_string/replace_string/'
+
+string_startwith/s/string_startwith/number in this file)
+
+
+paste fileA fileB | while read n k; do sed -i "s/$n/$k/g" file1; done
+
+paste ../traingrandyolo/coco14oldlabel ../traingrandyolo/coco14newlabel | while read n k; for file in *.txt; do sed -i "s/$n/$k/" "$file" > "$tmp"; mv "$tmp" "$file"; done
+
+paste ../traingrandyolo/coco14oldlabel ../traingrandyolo/coco14newlabel | while IFS= read -r n k;do sed -i "s/^$n/$k/" "$file" > "$tmp"; mv "$tmp" "$file"; done
+
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp2# while IFS= read -r n k; do sed -i "s/^$n/$k/" "$file" > "$tmp" && mv "$tmp" "$file"; done < <(paste ../traingrandyolo/coco14oldlabel ../traingrandyolo/coco14newlabel)
+sed: can't read : No such file or directory
+sed: can't read : No such file or directory
+sed: can't read : No such file or directory
+sed: can't read : No such file or directory
+sed: can't read : No such file or directory
+sed: can't read : No such file or directory
+sed: can't read : No such file or directory
+
+ paste ../traingrandyolo/coco14oldlabel ../traingrandyolo/coco14newlabel | while IFS= read -r n k;do sed -i 's/^$n/$k/' "$file" > "$tmp" && mv "$tmp" "$file"; done
+sed: can't read : No such file or directory
+sed: can't read : No such file or directory
+sed: can't read : No such file or directory
+
+ while IFS= read -r n k; do sed -i "s/^$n/$k/"; done < "$file" > "$tmp" && mv "$tmp" "$file" < <(paste ../traingrandyolo/coco14oldlabel ../traingrandyolo/coco14newlabel)
+bash: : No such file or directory
+
+awk 'FNR==NR{a[FNR]=$0;next} {system("echo mv " a[FNR] OFS $0)}' ../traingrandyolo/coco14oldlabel ../traingrandyolo/coco14newlabel
+
+mv 0 0
+mv 2 1
+mv 3 2
+mv 14 3
+mv 15 4
+mv 16 5
+mv 24 6
+mv 26 7
+mv 28 8
+mv 43 9
+mv 62 10
+mv 63 11
+mv 67 12
+mv 76 13
+mv 80 14
+mv 81 15
+mv 82 16
+mv 83 17
+mv 84 18
+mv 85 19
+mv 86 20
+mv 87 21
+mv 88 22
+mv 89 23
+mv 90 24
+mv 91 25
+mv 92 26
+mv 93 27
+mv 94 28
+mv 95 29
+mv 96 30
+mv 97 31
+mv 98 32
+
+find . -type f -exec sed -i "s/^$n/$k/" < <(paste ../traingrandyolo/coco14oldlabel ../traingrandyolo/coco14newlabel) {} +
+gives no error but doesnt do anything
+
+paste test_from test_to | while read n k; do sed -i "s/^$n\b/$k/g" test_label.txt; done
+
+for file in *.txt; do paste ../traingrandyolo/coco14oldlabel ../traingrandyolo/coco14newlabel|while read n k; do sed -i "s/^$n\b/$k/g" "$file";done; done
+
+for file in *.txt; do sed -i "s/^$n\b/$k/g" "$file";done < <(paste ../traingrandyolo/coco14oldlabel ../traingrandyolo/coco14newlabel)
+
+paste ../traingrandyolo/coco14oldlabel ../traingrandyolo/coco14newlabel | while read n k; do sed -i "s/^$n\b/$k/g" "$file" > "$tmp" && mv "$tmp" "$file";done
+=============
+restart
+13/03/20
+
+# find .txt files that start with 14, 15, 16,24,26,28 and then count how many files are there
+
+root@3bd6b6e7921c:/objectstodetect/train2014label# find . |grep -Rw ^14|wc -l
+7355
+root@3bd6b6e7921c:/objectstodetect/train2014label# find . |grep -Rw ^15|wc -l
+3302
+root@3bd6b6e7921c:/objectstodetect/train2014label# find . |grep -Rw ^16|wc -l
+3776
+root@3bd6b6e7921c:/objectstodetect/train2014label# find . |grep -Rw ^24|wc -l
+6200
+root@3bd6b6e7921c:/objectstodetect/train2014label# find . |grep -Rw ^26|wc -l
+8779
+root@3bd6b6e7921c:/objectstodetect/train2014label# find . |grep -Rw ^28|wc -l
+4272
+
+
+
+root@3bd6b6e7921c:/objectstodetect/imagenetannotationstxt# ls -f|wc -l
+7954
+root@3bd6b6e7921c:/objectstodetect/imagenetannotationstxt# find . |grep -Rw ^80|wc -l
+531
+root@3bd6b6e7921c:/objectstodetect/imagenetannotationstxt# find . |grep -Rw ^81|wc -l
+625
+root@3bd6b6e7921c:/objectstodetect/imagenetannotationstxt# find . |grep -Rw ^82|wc -l
+527
+
+this might work
+
+find /path/to/files -type f -exec sed -i 's/oldstring/new string/g' {} \;
+
+find /path -type f -exec sed -i 's/oldstr/newstr/g' {} \;
+
+or this
+
+files=$(grep -rl oldstr path) && echo $files | xargs sed....
+
+funny i hvnt tried them before??
+
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# find . -type f -exec sed -i 's/^3/2/g' {} \;
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# find . |grep -Rw ^3|wc -l
+0
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# find . |grep -Rw ^2|wc -l
+36953
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# 
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# find . |grep -Rw ^14|wc -l
+7355
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# find . -type f -exec sed -i 's/^14/3/g' {} \;
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# find . |grep -Rw ^3|wc -l
+7355
+
+
+
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp2# find . |grep -Rw ^3|wc -l
+6033
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp2# 
+
+seems to work
+at the beginning there should be 6033 files that starts with 3 (at the beginning forgot to count), 
+then after the command -exec sed, all the ^3 are gone and changed to ^2 (but forgot to count ^2 at the beginning as well)
+try again with ^14 change to 3 and then count ^3 equals to the old ^14 = 7355 files
+but takes so long and have to wait for it one by one and strictly one after another for 33 times
+
+but the latter classes should be faster than the first few classes since it's much less in numbers of files
+
+delete train2014label14cp and copy from train2014label14only again
+then can start again from ^2 change to 1
+
+the regex took 24, 25, 28 for 2 as well, it shouldn't have
+root@3bd6b6e7921c:/objectstodetect/train2014label14# cd ../train2014label14only
+root@3bd6b6e7921c:/objectstodetect/train2014label14only# find . |grep -Rw ^24|wc -l
+6200
+root@3bd6b6e7921c:/objectstodetect/train2014label14only# find . |grep -Rw ^26|wc -l
+8779
+root@3bd6b6e7921c:/objectstodetect/train2014label14only# find . |grep -Rw ^28|wc -l
+4272
+
+
+root@3bd6b6e7921c:/objectstodetect/train2014label14# find . |grep -Rw ^1| wc -l
+0
+root@3bd6b6e7921c:/objectstodetect/train2014label14# find . |grep -Rw ^2| wc -l
+30920
+root@3bd6b6e7921c:/objectstodetect/train2014label14# find . |grep -Rw ^24| wc -l
+6200
+root@3bd6b6e7921c:/objectstodetect/train2014label14# find . |grep -Rw ^3| wc -l
+6033
+root@3bd6b6e7921c:/objectstodetect/train2014label14# find . -type f -exec sed -i 's/^2/1/g' {} \;
+root@3bd6b6e7921c:/objectstodetect/train2014label14# find . |grep -Rw ^1| wc -l
+30920
+root@3bd6b6e7921c:/objectstodetect/train2014label14# find . |grep -Rw ^2| wc -l
+0
+root@3bd6b6e7921c:/objectstodetect/train2014label14# find . |grep -Rw ^24| wc -l
+0
+root@3bd6b6e7921c:/objectstodetect/train2014label14# find . |grep -Rw ^14| wc -l
+13555
+root@3bd6b6e7921c:/objectstodetect/train2014label14# 
+
+sed doesn't have the correct regex
+once^2 got changed to 1, ^24 got changed to ^14 too
+
+this works, right!?!
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# find . -type f -exec sed -i 's/^2\b/1/g' {} \;
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# find . |grep -Rw ^1| wc -l
+30920
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# find . |grep -Rw ^14| wc -l
+7355
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# find . |grep -Rw ^24| wc -l
+6200
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# find . |grep -Rw ^2| wc -l
+0
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# 
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# find . |grep -Rw ^3| wc -l
+6033
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# find . |grep -Rw ^15| wc -l
+3302
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# find . |grep -Rw ^16| wc -l
+3776
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# find . |grep -Rw ^26| wc -l
+8779
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# find . |grep -Rw ^28| wc -l
+4272
+
+
+wrote a small script to let it do the rest of the job for coco
+then for imagenetnet just copy all the label files out
+root@3bd6b6e7921c:/objectstodetect# cp $(<imagenettrainsplit_add/imagenetlabel.txt) imagenetlabel
+
+ok let's do a small script and let it run too :)
+
+tears gonna fall oiiii
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# ../../darknet/relabel_code/coco80to14.sh
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# find . |grep -Rw ^26| wc -l
+0
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# find . |grep -Rw ^7| wc -l
+8779
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# find . |grep -Rw ^10| wc -l
+4036
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# find . |grep -Rw ^11| wc -l
+3415
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# find . |grep -Rw ^12| wc -l
+4464
+root@3bd6b6e7921c:/objectstodetect/train2014label14cp# 
+
+so the reindexed coco14label is at train2014label14cp
+
+why fire is class 96 and not 98?? it IS 98!
+what are 97 and 98?? because i added ski mask and gas mask at the end?
+
+now gun, machine gune, pistol is 27, 28,29
+as mask is 30, ski mask is 31
+
+change class fire from index 98 to 32
+find . -type f -exec sed -i 's/^98/32/g' {} \;
+
+this is where the label files of fire located
+root@3bd6b6e7921c:/objectstodetect/firefromyolomark/traintest/label# nano 5948763078.txt
+
+val
+root@3bd6b6e7921c:/objectstodetect/fireandsmoke/FiSmo-Images/Flickr-FireSmoke/valid# find . -type f -exec sed -i 's/^98/32/g' {} \;
+just change inplace. didn't make copies out like coco and imagenet
+
+and where are the fire images located
+/objectstodetect/fireandsmoke/FiSmo-Images/Flickr-FireSmoke/trainwithnegative#
+
+this is where imagenet latest training images located
+/objectstodetect/imagenettrainsplit_add#
+n01728572_6129.txt    n01729977_12762.JPEG  n01735189_19245.txt   n01739381_5107.JPEG   n03424325_11331.txt   n04086273_20331.JPEG  n04229816_411.txt
+note: for imagenet must be JPEG not .jpg
+
+and imagenet reindexed label for coco14grand (upto ski mask31)
+root@3bd6b6e7921c:/objectstodetect/imagenetlabel# cd ..
+
+now need to put all the newly reindexed labels into the folder where the images are
+
+====
+150320
+
+find . -type f -name "*.txt" > grandyolococolabel.txt
+nano grandyolococolabel.txt
+find and replace ./ with train2014/ (its folder path so that the below command can find the files)
+
+then move the old label out
+
+for file in $(cat train2014/grandyolococolabel.txt); do mv "$file" grandyolococolabel; done
+
+root@3bd6b6e7921c:/objectstodetect# for file in $(cat imagenettrainsplit_add/grandyoloimagenetlabel.txt); do mv "$file" grandyoloimagenetlabel; done
+
+
+check label, seems to be correct
+check numbers of label, the old ones that i removed were82084 files, the new ones to be put back in is 82083 files, 
+but there are 82783 image jpg files
+what are those 700 images?
+
+then copy the new label in
+cp -r . ../train2014/
+cp -r . ../imagenettrainsplit_add/
+
+now val set
+reindex label
+take old ones out and gives the name
+grandyoloimagenetvallabel
+put new ones back in - coco14grandimagenetvallabel
+
+cp -r . ../imagenettestsplit_add
+root@3bd6b6e7921c:/objectstodetect/coco14grandimagenetvallabel# cp -r . ../imagenettestsplit_add
+
+root@3bd6b6e7921c:/objectstodetect/val2014label14# ../../darknet/relabel_code/coco80to14.sh
+
+
+../../objectstodetect/fireandsmoke/FiSmo-Images/Flickr-FireSmoke/trainwithnegative/3732212525.jpg
+
+
+change folder names where coco14grand relabelled are;
+train2014label14cp --> train2014label14relabelled
+val2014label14 --> val2014label14relabelled
+
+find . |grep -Rw ^2| wc -l
+
+for file in $(cat val2014/grandyolococovallabel.txt); do mv "$file" grandyolococovallabel; done -->delete folder grandyolococovallabel, by mistake,
+ but it actually is the same as val2014label
+
+COCO_val2014_000000465545.txt
+root@3bd6b6e7921c:/objectstodetect/val2014label14relabelled# cp -r . ../val2014
+
+coco train2014/val2014 relabel done
+imagenet train/testsplit_add relabel done
+fire trainwithnegative/valid relabel -inplace done
+
+check traincoco14grand.txt and valcoco14grand.txt again if the location of image pockets need to change. it shouldn't need to because i didin't move images
+only switch the label
+coco14grand.data is done
+
+next is coco14grand.cfg
+done
+
+ready to train(with multi gpu)?
+
+./darknet detector train ../../objectstodetect/traincoco14grand/coco14grand.data ../../objectstodetect/traincoco14grand/coco14grand.cfg ../weights/darknet53.conv.74 -map
+
+
+started not with multigpu
+will stop after 1000 iterations and then use multigpu
+
+./darknet detector train ../../objectstodetect/traincoco14grand/coco14grand.data ../../objectstodetect/traincoco14grand/coco14grand.cfg backup/coco14grand_last.weights -gpus 0,1,2,3 -map
+
+yolo] params: iou loss: mse (2), iou_norm: 0.75, cls_norm: 1.00, scale_x_y: 1.00
+Total BFLOPS 65.537 
+avg_outputs = 523091 
+ Allocate additional workspace_size = 33.55 MB 
+Loading weights from backup/coco14grand_last.weights...
+ seen 64, trained: 486 K-images (7 Kilo-batches_64) 
+Done! Loaded 107 layers from weights-file 
+Learning Rate: 0.004, Momentum: 0.9, Decay: 0.0005
+ If error occurs - run training with flag: -dont_show 
+
+** (chart_coco14grand.png:80974): WARNING **: Couldn't connect to accessibility bus: Failed to connect to socket /tmp/dbus-ULbCffudw2: Connection refused
+Resizing, random_coef = 1.40 
+
+ 608 x 608 
+ try to allocate additional workspace_size = 33.55 MB 
+ CUDA allocate done! 
+ Try to set subdivisions=64 in your cfg-file. 
+CUDA status Error: file: ./src/dark_cuda.c : () : line: 373 : build time: Mar 17 2020 - 00:24:05 
+
+ CUDA Error: out of memory
+CUDA Error: out of memory: Resource temporarily unavailable
+darknet: ./src/utils.c:325: error: Assertion `0' failed.
+
+Aborted (core dumped)
+
+
+
+
+
+ 94 yolo
+[yolo] params: iou loss: mse (2), iou_norm: 0.75, cls_norm: 1.00, scale_x_y: 1.00
+  95 route  91 		                           ->   26 x  26 x 256 
+  96 conv    128       1 x 1/ 1     26 x  26 x 256 ->   26 x  26 x 128 0.044 BF
+  97 upsample                 2x    26 x  26 x 128 ->   52 x  52 x 128
+  98 route  97 36 	                           ->   52 x  52 x 384 
+  99 conv    128       1 x 1/ 1     52 x  52 x 384 ->   52 x  52 x 128 0.266 BF
+ 100 conv    256       3 x 3/ 1     52 x  52 x 128 ->   52 x  52 x 256 1.595 BF
+ 101 conv    128       1 x 1/ 1     52 x  52 x 256 ->   52 x  52 x 128 0.177 BF
+ 102 conv    256       3 x 3/ 1     52 x  52 x 128 ->   52 x  52 x 256 1.595 BF
+ 103 conv    128       1 x 1/ 1     52 x  52 x 256 ->   52 x  52 x 128 0.177 BF
+ 104 conv    256       3 x 3/ 1     52 x  52 x 128 ->   52 x  52 x 256 1.595 BF
+ 105 conv    114       1 x 1/ 1     52 x  52 x 256 ->   52 x  52 x 114 0.158 BF
+ 106 yolo
+[yolo] params: iou loss: mse (2), iou_norm: 0.75, cls_norm: 1.00, scale_x_y: 1.00
+Total BFLOPS 65.537 
+avg_outputs = 523091 
+ Allocate additional workspace_size = 33.55 MB 
+Loading weights from backup/coco14grand_last.weights...
+ seen 64, trained: 524 K-images (8 Kilo-batches_64) 
+Done! Loaded 107 layers from weights-file 
+Learning Rate: 0.004, Momentum: 0.9, Decay: 0.0005
+ If error occurs - run training with flag: -dont_show 
+
+** (chart_coco14grand.png:86783): WARNING **: Couldn't connect to accessibility bus: Failed to connect to socket /tmp/dbus-ULbCffudw2: Connection refused
+Resizing, random_coef = 1.40 
+
+ 608 x 608 
+ try to allocate additional workspace_size = 33.55 MB 
+ CUDA allocate done! 
+ Try to set subdivisions=64 in your cfg-file. 
+CUDA status Error: file: ./src/dark_cuda.c : () : line: 373 : build time: Mar 17 2020 - 00:24:05 
+
+ CUDA Error: out of memory
+CUDA Error: out of memory: Resource temporarily unavailable
+darknet: ./src/utils.c:325: error: Assertion `0' failed.
+Aborted (core dumped)
+
+
+
+
+root@3bd6b6e7921c:/darknet/darknet# nvidia-smi
+Tue Mar 17 15:30:43 2020       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 410.104      Driver Version: 410.104      CUDA Version: 10.0     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  GeForce GTX 108...  On   | 00000000:0A:00.0 Off |                  N/A |
+| 30%   53C    P2    60W / 200W |    948MiB / 11178MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+|   1  GeForce GTX 108...  On   | 00000000:0B:00.0 Off |                  N/A |
+| 27%   47C    P8    18W / 200W |   9707MiB / 11178MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+|   2  GeForce GTX 108...  On   | 00000000:41:00.0 Off |                  N/A |
+| 23%   39C    P8    16W / 200W |   9707MiB / 11178MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+|   3  GeForce GTX 108...  On   | 00000000:42:00.0  On |                  N/A |
+| 26%   46C    P8    19W / 200W |   2275MiB / 11177MiB |      5%      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+
+
+ matt-gardner commented on Apr 15, 2019
+
+Thanks @junkyul. The way our multi-GPU code works is that we replicate the model across all GPUs, so we can process one batch per GPU. The code then aggregates the results from all GPUs, computes gradients, and takes an optimizer step. That is, we do data parallel computation, not model parallel computation. So we can't just decide to use the memory on a separate GPU if the model doesn't fit on a single GPU in the first place.
+
+I'm pretty sure that answers your question, but feel free to let me know if it didn't (and anyone else reading along, I'm pretty sure what I said about the multi-GPU stuff was accurate, but please correct me if I'm wrong).
+
+19/03/20
+
+1. CUDA status Error: file: ./src/dark_cuda.c : () : line: 373 : build time: Mar 17 2020 - 00:24:05 
+
+2. darknet: ./src/utils.c:325: error: Assertion `0' failed.
+const char
+
+3. 33 objects for a network that optimized for 80 objects
+33000 iterations mAP 22%, 35xxx iterations mAP 15%!!!
+
+4. data paralelism- have to divide data among GPUS
+
+how many workers/replica- how to divide works among workers
+one worker (PS?) only calculate accuracy, another only bias?
+communications between workers, too much makes the training slower
+
+i already changed subdivision = 64 in cfg file
+change of batch size so that batch size/subdivision as small as possible and cuda doens't get out of memory?
+
+
+    so if batch is 64
+    and subdivision is 1
+
+    64 images will be processed in one batch ? this should be faster ?
+
+Yes.
+
+Upper limit - size of GPU-memory.
+
+=====
+darknet: ./src/utils.c:325: error: Assertion `0' failed.
+void error(const char *s)
+{
+    perror(s);
+    assert(0);
+
+
+assertion error
+
+const char*s
+
+Does that mean the function is restricted from changing the address (changing s)
+No.
+Does that mean the function is restricted from changing what's being pointed to (*s)?
+Yes.
+
+const char *s; /* non-const pointer to const char */
+
+
+the value being pointed to can't be changed but the pointer can be.
+
+In const char * it signifies that the characters being pointed to are const
+
+what value is being pointed to here?
+
+
+======
+change .cfg
+from batch =64 subdivision =64
+to batch = 128 subdivision =64
+now training with multigpu works
+
+was reading this from alexeyAB and erikguo
+https://github.com/AlexeyAB/darknet/issues/4386
+
+free -h gives free 6.9G instead of 1G and available 40G
+
+but starting from 19xxx iterations again(?!!) and will calculate mAP at 22xxx iterations
+no out of memory error, no const char*s assertion error???
+why??
+====
+
+oot@3bd6b6e7921c:/darknet/darknet/backup# nvidia-smi
+Thu Mar 19 21:36:38 2020       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 410.104      Driver Version: 410.104      CUDA Version: 10.0     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  GeForce GTX 108...  On   | 00000000:0A:00.0 Off |                  N/A |
+| 47%   79C    P2   155W / 200W |   3166MiB / 11178MiB |      9%      Default |
++-------------------------------+----------------------+----------------------+
+|   1  GeForce GTX 108...  On   | 00000000:0B:00.0 Off |                  N/A |
+| 66%   86C    P2   152W / 200W |   2325MiB / 11178MiB |     15%      Default |
++-------------------------------+----------------------+----------------------+
+|   2  GeForce GTX 108...  On   | 00000000:41:00.0 Off |                  N/A |
+| 57%   85C    P2   139W / 200W |   2325MiB / 11178MiB |     28%      Default |
++-------------------------------+----------------------+----------------------+
+|   3  GeForce GTX 108...  On   | 00000000:42:00.0  On |                  N/A |
+| 68%   86C    P2   150W / 200W |   4624MiB / 11177MiB |     37%      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
+
+
+oot@3bd6b6e7921c:/darknet/darknet/backup# nvidia-smi
+Thu Mar 19 21:44:21 2020       
++-----------------------------------------------------------------------------+
+| NVIDIA-SMI 410.104      Driver Version: 410.104      CUDA Version: 10.0     |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  GeForce GTX 108...  On   | 00000000:0A:00.0 Off |                  N/A |
+| 48%   82C    P2   171W / 200W |   4130MiB / 11178MiB |     80%      Default |
++-------------------------------+----------------------+----------------------+
+|   1  GeForce GTX 108...  On   | 00000000:0B:00.0 Off |                  N/A |
+| 78%   87C    P2   198W / 200W |   3289MiB / 11178MiB |     93%      Default |
++-------------------------------+----------------------+----------------------+
+|   2  GeForce GTX 108...  On   | 00000000:41:00.0 Off |                  N/A |
+| 66%   85C    P2   205W / 200W |   3289MiB / 11178MiB |     90%      Default |
++-------------------------------+----------------------+----------------------+
+|   3  GeForce GTX 108...  On   | 00000000:42:00.0  On |                  N/A |
+| 76%   87C    P2   137W / 200W |   5587MiB / 11177MiB |     91%      Default |
++-------------------------------+----------------------+----------------------+
+                                                                               
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID   Type   Process name                             Usage      |
+|=============================================================================|
++-----------------------------------------------------------------------------+
+
+./darknet detector train ../../objectstodetect/traincoco14grand/coco14grand.data ../../objectstodetect/traincoco14grand/coco14grand.cfg backup/coco14grand_last.weights -gpus 0,1,2,3 -map
+
+
+/darknet/darknet# ./darknet detector train ../../objectstodetect/traincoco14grand/coco14grand.data ../../objectstodetect/traincoco14grand/coco14grand2.cfg backcoco14grand1/coco14grand_66000.weights -gpus 0,1,2,3 -map
+
+
+
 
 
 

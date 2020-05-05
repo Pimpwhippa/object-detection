@@ -1,0 +1,129 @@
+plt.regtangle((box[1],box[2]),(box[3],box[4]))
+
+dog_bbox, cat_bbox = [60, 45, 378, 516], [400, 112, 655, 493]
+
+def bbox_to_rect(bbox, color):
+
+    """Convert bounding box to matplotlib format."""
+    # Convert the bounding box 
+	(top-left x, top-left y, bottom-right x, bottom-right y) format 
+    #to matplotlib format: ((upper-left x, upper-left y), width, height)
+    
+	return d2l.plt.Rectangle(
+        xy=(bbox[0], bbox[1]), width=bbox[2]-bbox[0], height=bbox[3]-bbox[1],
+				x2-x1, 				y2-y1
+        fill=False, edgecolor=color, linewidth=2)
+
+the key is plt and cv2.
+
+not x1,x2 and y1, y2 or x, y,w,h
+
+if plt, can plot x,y,w,h straight away and 0,0 starts from top left
+if cv2, have to calculate vertex, that is find 2 points where lines meet, that are point x1,y1 and point x2,y2
+
+so i'll use plt.rectangle to plot
+no because it need x2-x1 and y2-y1 but we only have x,y,w,h
+no!! we can plot immediately
+plt.regtangle((box[1],box[2]),(box[3],box[4]))
+
+here is how plt works
+https://www.d2l.ai/chapter_computer-vision/bounding-box.html
+https://stackoverflow.com/questions/44593729/how-to-plot-rectangle-in-python
+but the SO example the (0,0) starts from bottom left as usual, but actually for yolo (0,0) is top left
+
+
+and here is how cv2 works
+this one don't really understand where are the current points why (x-w)/2
+https://blog.goodaudience.com/part-1-preparing-data-before-training-yolo-v2-and-v3-deepfashion-dataset-3122cd7dd884
+
+this example is better explained. this example where x,y instead of being the center, it has already set to be the top left, so only have to find one point by adding w to x and h to y
+cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
+https://www.pyimagesearch.com/2018/11/12/yolo-object-detection-with-opencv/
+
+then still have to clarify
+https://docs.opencv.org/2.4/modules/core/doc/drawing_functions.html
+https://www.google.com/search?client=ubuntu&channel=fs&q=what+is+vertex&ie=utf-8&oe=utf-8
+
+
+def from_yolo_to_cor(box, shape):
+    img_h, img_w, _ = shape
+    # x1, y1 = ((x + witdth)/2)*img_width, ((y + height)/2)*img_height
+    # x2, y2 = ((x - witdth)/2)*img_width, ((y - height)/2)*img_height
+    x1, y1 = int((box[0] + box[2]/2)*img_w), int((box[1] + box[3]/2)*img_h)
+    x2, y2 = int((box[0] - box[2]/2)*img_w), int((box[1] - box[3]/2)*img_h)
+    return x1, y1, x2, y2
+    
+def draw_boxes(img, boxes):
+    for box in boxes:
+        x1, y1, x2, y2 = from_yolo_to_cor(box, shape)
+        cv2.rectangle(img, (x1, y1), (x2, y2), (0,255,0), 3)
+    plt.imshow(img)
+
+
+n summary, a single YOLO image annotation consists of a space separated object category ID and four ratios:
+
+    Object category ID.
+    X coordinate, corresponding to the annotation box’s centre, and relative to the image width.
+    Y coordinate, corresponding to the annotation box’s centre, and relative to the image height.
+    Annotation box width.
+    Annotation box height.
+
+Each YOLO “label” file can contain a new line separated list of these annotations, for objects of various categories.
+
+MS COCO bounding box coordinates correspond to the top-left of the annotation box. 
+
+Darknet YOLO, on the other hand, expects the coordinate to be the centre point of the annotation bounding box. 
+Therefore, the annotation box’s centre point coordinate must be calculated prior to making it relative to the complete image size.
+
+image_shape = float(img.shape[0]),float(img.shape[1])
+
+boxes = []
+confidences = []
+classIDs = []
+
+for output in layerOutputs:
+	# loop over each of the detections
+	for detection in output:
+		# extract the class ID and confidence (i.e., probability) of
+		# the current object detection
+		scores = detection[5:]
+		classID = np.argmax(scores)
+		confidence = scores[classID]
+ 
+		# filter out weak predictions by ensuring the detected
+		# probability is greater than the minimum probability
+		if confidence > args["confidence"]:
+			# scale the bounding box coordinates back relative to the
+			# size of the image, keeping in mind that YOLO actually
+			# returns the center (x, y)-coordinates of the bounding
+			# box followed by the boxes' width and height
+			box = detection[0:4] * np.array([W, H, W, H])
+			(centerX, centerY, width, height) = box.astype("int")
+ 
+			# use the center (x, y)-coordinates to derive the top and
+			# and left corner of the bounding box
+			x = int(centerX - (width / 2))
+			y = int(centerY - (height / 2))
+ 
+			# update our list of bounding box coordinates, confidences,
+			# and class IDs
+			boxes.append([x, y, int(width), int(height)])
+			confidences.append(float(confidence))
+			classIDs.append(classID)
+
+		# extract the bounding box coordinates
+		(x, y) = (boxes[i][0], boxes[i][1])
+		(w, h) = (boxes[i][2], boxes[i][3])
+ 
+		# draw a bounding box rectangle and label on the image
+		color = [int(c) for c in COLORS[classIDs[i]]]
+		cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
+		text = "{}: {:.4f}".format(LABELS[classIDs[i]], confidences[i])
+		cv2.putText(image, text, (x, y - 5), cv2.FONT_HERSHEY_SIMPLEX,
+			0.5, color, 2)
+ 
+# show the output image
+cv2.imshow("Image", image)
+
+
+
