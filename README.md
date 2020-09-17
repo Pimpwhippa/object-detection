@@ -8,6 +8,6 @@ The detector serves as an AI extension on the company’s surveillance robot pro
 • Train, test and fine-tune the deep learning model YOLOv3 (You-Only-Look-Once) to reach the published mAP (mean average precision)
 
 • Write a script for reproduction. Scripts are in reproduce_code/
-    coco_to_yolo_comeback_cp.sh
-    imagenet_allprocess_sshsave.sh
+    coco_to_yolo_comeback_cp.sh,
+    imagenet_allprocess_sshsave.sh,
     firestart.sh
